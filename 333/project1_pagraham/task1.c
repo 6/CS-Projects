@@ -12,30 +12,30 @@ int main(int argc, char *argv[]) {
 int task1() {
   char c = 80;
   short s = 22;
-  int i = 0x012345;
+  int i = 0x1;
   long l = 123456789101112;
   float f = .123e3;
   double d = 1234.5678;
-  //printf("%c %d %d %ld %f %f\n", type_char, type_short, type_int, type_long, type_float, type_double);
+  printf("%c %d %d %ld %f %f\n\n", c, s, i, l, f, d);
   
-  print_type_info("char", c, sizeof(c));
-  print_type_info("short", s, sizeof(s));
-  print_type_info("int", i, sizeof(i));
-  print_type_info("long", l, sizeof(l));
-  print_type_info("float", f, sizeof(f));
-  print_type_info("double", d, sizeof(d));
-  
+  print_var_info("char", sizeof(c), c);
+  print_var_info("short", sizeof(s), s);
+  print_var_info("int", sizeof(i), i);
+  print_var_info("long", sizeof(l), l);
+  print_var_info("float", sizeof(f), f);
+  print_var_info("double", sizeof(d), d);
+
   return(0);
 }
 
-int print_type_info(char *desc, char* type, int num_bytes) {
-  printf("\n-------\n%s %d byte(s)\n", desc, num_bytes);
+int print_var_info(char *type_str, long num_bytes, char* var) {
+  printf("%s (bytes: %ld)\n", type_str, num_bytes);
   
-  char* ptr = (char*) &type;
+  char* ptr = (char*) &var;
   int i;
   for(i=0; i < num_bytes; i++){
     printf("%02x ", ptr[i]);
   }
-  
+  puts("\n-------");
   return(0);
 }
