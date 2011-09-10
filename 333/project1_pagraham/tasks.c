@@ -3,12 +3,15 @@
  */
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 int main(int argc, char *argv[]) {
+  return bus_error();
   //return task1();
   //return task2();
   //return task3();
-  return task4();
+  //return task4();
+  //return task5("what");
 }
 
 /* 
@@ -31,6 +34,8 @@ int task1() {
   print_memory_contents("long", sizeof(l), &l);
   print_memory_contents("float", sizeof(f), &f);
   print_memory_contents("double", sizeof(d), &d);
+  
+  print_endianess();
 
   return(0);
 }
@@ -82,6 +87,7 @@ int task4() {
   char* ptr;
   while(1) {
     ptr = malloc(10000);
+    free(ptr);
   }
   
   return(0);
@@ -92,8 +98,22 @@ int task4() {
  * decision variable within the function. Prints out "safe" if the decision
  * variable has the value 0 and "hacked" if the decision variable is non-zero.
  */
-int task5() {
+int task5(char* param_str) {
+  char local_string[5];
+  int decision = 0;
   
+  strcpy(local_string, param_str);
+
+  printf ("%s, %d\n", local_string, decision);
+  
+  if(decision == 0) {
+    puts("Safe");
+  }
+  else {
+    puts("Hacked");
+  }
+  
+  return(0);
 }
 
 /*
@@ -114,4 +134,65 @@ int print_memory_contents(char *type_str, long num_bytes, char* ptr) {
   
   puts("\n-------");
   return(0);
+}
+
+/*
+ * Print if machine endianess using example from Wikipedia:
+ * http://en.wikipedia.org/wiki/Endianness
+ */
+int print_endianess() {
+  int i = 0x0A0B0C0D;
+  char* i_ptr = (char*) &i;
+  
+  if(i_ptr[0] == 0x0A) {
+    puts("Big endian, since MSB value is at the lowest memory address");
+  }
+  else if(i_ptr[0] == 0x0D) {
+    puts("Little endian, since LSB value is at the lowest memory address");
+  }
+  else {
+    puts("Some other endian (middle-endian?), since neither the MSB nor LSB values are at the lowest memory address");
+  }
+  return(0);
+}
+
+// Finds the float to which you can add one and get back same number
+int find_special_float() {
+  float f = 0;
+  float previous_f;
+  while(1) {
+    previous_f = f;
+    f++;
+    if(f == previous_f) {
+      printf("Adding 1 to %f gives back %f\n", previous_f, f);
+      break;
+    }
+  }
+  return(0);
+}
+
+// Generate a "segmentation fault" in 4 characters
+r() {
+  r();
+}
+
+// Generate a "segmentation fault" in 15 characters
+runtime_error1() {
+  puts((char*)1);
+}
+
+// Generate a "segmentation fault" in 16 characters
+runtime_error2() {
+  int a[1];a[2]=0;
+}
+
+// Generate a "floating point exception" in 12 characters
+runtime_error3() {
+  int z=0;1/z;
+}
+
+// Generate a bus error, since C strings are read-only
+bus_error() {
+  char *s="a";
+  *s=0;
 }
