@@ -21,21 +21,19 @@ int task1() {
   double d = 1234.5678;
   printf("%c %d %d %ld %f %f\n\n", c, s, i, l, f, d);
   
-  print_var_info("char", sizeof(c), c);
-  print_var_info("short", sizeof(s), s);
-  print_var_info("int", sizeof(i), i);
-  print_var_info("long", sizeof(l), l);
-  print_var_info("float", sizeof(f), f);
-  print_var_info("double", sizeof(d), d);
+  print_memory_contents("char", sizeof(c), &c);
+  print_memory_contents("short", sizeof(s), &s);
+  print_memory_contents("int", sizeof(i), &i);
+  print_memory_contents("long", sizeof(l), &l);
+  print_memory_contents("float", sizeof(f), &f);
+  print_memory_contents("double", sizeof(d), &d);
 
   return(0);
 }
 
-int print_var_info(char *type_str, long num_bytes, char* var) {
+int print_memory_contents(char *type_str, long num_bytes, char* ptr) {
   printf("%s (bytes: %ld)\n", type_str, num_bytes);
-  
-  // assign the address of each variable to a pointer
-  char* ptr = (char*) &var;
+
   // loop through each element in the char pointer, byte-by-byte
   int i;
   for(i=0; i < num_bytes; i++){
