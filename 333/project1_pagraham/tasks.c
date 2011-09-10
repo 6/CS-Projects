@@ -7,7 +7,8 @@
 int main(int argc, char *argv[]) {
   //return task1();
   //return task2();
-  return task3();
+  //return task3();
+  return task4();
 }
 
 /* 
@@ -78,7 +79,12 @@ int task3() {
  * long time.
  */
 int task4() {
+  char* ptr;
+  while(1) {
+    ptr = malloc(10000);
+  }
   
+  return(0);
 }
 
 /*
