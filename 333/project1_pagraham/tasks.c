@@ -6,7 +6,6 @@
 #include <string.h>
 
 int main(int argc, char *argv[]) {
-  return bus_error();
   //return task1();
   //return task2();
   //return task3();
@@ -189,10 +188,4 @@ runtime_error2() {
 // Generate a "floating point exception" in 12 characters
 runtime_error3() {
   int z=0;1/z;
-}
-
-// Generate a bus error, since C strings are read-only
-bus_error() {
-  char *s="a";
-  *s=0;
 }
