@@ -1,17 +1,19 @@
 /*
- * Peter Graham CS333 Task 1
- *
- * A program that declares a variable of each of the basic types (char, short, 
- * int, long, float, double) and assigns each one a value. It explores how large
- * each of these basic types is and how the data is stored in memory.
+ * Peter Graham CS333
  */
 #include <stdio.h>
 #include <stdlib.h>
 
 int main(int argc, char *argv[]) {
-  return task1();
+  //return task1();
+  return task2();
 }
 
+/* 
+ * A program that declares a variable of each of the basic types (char, short, 
+ * int, long, float, double) and assigns each one a value. It explores how large
+ * each of these basic types is and how the data is stored in memory.
+ */
 int task1() {
   char c = 80; // ordinal value
   short s = 012; // octal
@@ -28,6 +30,23 @@ int task1() {
   print_memory_contents("float", sizeof(f), &f);
   print_memory_contents("double", sizeof(d), &d);
 
+  return(0);
+}
+
+/*
+ * A program that looks at how memory is laid out in a variable.
+ */
+int task2() {
+  typedef struct {
+      int i;
+      short s1;
+      short s2;
+      char c;
+  } Cool;
+  
+  Cool c = {0x1,012,013,'P'};
+  print_memory_contents("cool", sizeof(c), &c);
+  
   return(0);
 }
 
