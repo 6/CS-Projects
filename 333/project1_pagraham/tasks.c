@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
   //return task2();
   //return task3();
   //return task4();
-  //return task5("what");
+  return task5("what123");
 }
 
 /* 
@@ -96,13 +96,16 @@ int task4() {
  * Demonstrates that there is a security issue in strcpy() by overwriting a
  * decision variable within the function. Prints out "safe" if the decision
  * variable has the value 0 and "hacked" if the decision variable is non-zero.
+ *
+ * Note: compile with the flag -D_FORTIFY_SOURCE=0 for this to work on newer
+ * versions of GCC (otherwise it will runtime abort). Source:
+ * http://thexploit.com/secdev/turning-off-buffer-overflow-protections-in-gcc/
  */
 int task5(char* param_str) {
-  char local_string[5];
   int decision = 0;
-  
+  char local_string[4];  
   strcpy(local_string, param_str);
-
+  
   printf ("%s, %d\n", local_string, decision);
   
   if(decision == 0) {
