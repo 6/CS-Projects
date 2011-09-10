@@ -10,9 +10,9 @@ int main(int argc, char *argv[]) {
 }
 
 /* 
- * A program that declares a variable of each of the basic types (char, short, 
- * int, long, float, double) and assigns each one a value. It explores how large
- * each of these basic types is and how the data is stored in memory.
+ * Declares a variable of each of the basic types (char, short, int, long,
+ * float, double) and assigns each one a value. It explores how large each of
+ * these basic types is and how the data is stored in memory.
  */
 int task1() {
   char c = 80; // ordinal value
@@ -34,7 +34,7 @@ int task1() {
 }
 
 /*
- * A program that looks at how memory is laid out in a variable.
+ * Looks at how memory is laid out in a structure.
  */
 int task2() {
   typedef struct {
@@ -48,6 +48,30 @@ int task2() {
   print_memory_contents("cool", sizeof(c), &c);
   
   return(0);
+}
+
+/*
+ * See how much memory we can access by 
+ */
+int task3() {
+  
+}
+
+/*
+ * Repeatedly allocates a small amount of memory in a loop that goes on for a
+ * long time.
+ */
+int task4() {
+  
+}
+
+/*
+ * Demonstrates that there is a security issue in strcpy() by overwriting a
+ * decision variable within the function. Prints out "safe" if the decision
+ * variable has the value 0 and "hacked" if the decision variable is non-zero.
+ */
+int task5() {
+  
 }
 
 int print_memory_contents(char *type_str, long num_bytes, char* ptr) {
