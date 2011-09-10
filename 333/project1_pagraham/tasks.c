@@ -51,7 +51,9 @@ int task2() {
 }
 
 /*
- * See how much memory we can access by 
+ * See how much memory we can access by giving a char* the address of itself and
+ * printing out the memory byte-by-byte from index zero onwards with no stopping
+ * condition.
  */
 int task3() {
   
