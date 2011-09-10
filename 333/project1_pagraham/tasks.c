@@ -6,7 +6,8 @@
 
 int main(int argc, char *argv[]) {
   //return task1();
-  return task2();
+  //return task2();
+  return task3();
 }
 
 /* 
@@ -21,7 +22,7 @@ int task1() {
   long l = 123456789101112;
   float f = .123e3;
   double d = 1234.5678;
-  printf("%c %d %d %ld %f %f\n\n", c, s, i, l, f, d);
+  printf("\n%c %d %d %ld %f %f\n\n", c, s, i, l, f, d);
   
   print_memory_contents("char", sizeof(c), &c);
   print_memory_contents("short", sizeof(s), &s);
@@ -44,7 +45,7 @@ int task2() {
       char c;
   } Cool;
   
-  Cool c = {0x1,012,013,'P'};
+  Cool c = {1, 012, 013, 'P'};
   print_memory_contents("cool", sizeof(c), &c);
   
   return(0);
@@ -56,7 +57,20 @@ int task2() {
  * condition.
  */
 int task3() {
+  short s;
+  char P;
+  char* ptr;
   
+  s = 10;
+  P = 'P';
+  ptr = (char*) &ptr;
+  
+  int i;
+  for(i=0; ; i++) {
+    printf("%02x\n", ptr[i]);
+  }
+  
+  return(0);
 }
 
 /*
@@ -76,13 +90,20 @@ int task5() {
   
 }
 
+/*
+ * Prints out the contents of a given char* pointer.
+ *
+ * @param *type_str: a string describing the variable type
+ * @param num_bytes: number of bytes in the variable
+ * @param ptr: char* pointer for the variable
+ */
 int print_memory_contents(char *type_str, long num_bytes, char* ptr) {
   printf("%s (bytes: %ld)\n", type_str, num_bytes);
 
   // loop through each element in the char pointer, byte-by-byte
   int i;
   for(i=0; i < num_bytes; i++){
-    printf("%02x ", ptr[i]);
+    printf("%02x ", ptr[i]); // print out byte with leading 0 if applicable
   }
   
   puts("\n-------");
