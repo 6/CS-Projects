@@ -7,10 +7,10 @@
 
 int main(int argc, char *argv[]) {
   //return task1();
-  //return task2();
+  return task2();
   //return task3();
   //return task4();
-  return task5("what123");
+  //return task5("what123");
 }
 
 /* 
@@ -44,14 +44,14 @@ int task1() {
  */
 int task2() {
   typedef struct {
+      char c1;
+      char c2;
       int i;
-      short s1;
-      short s2;
-      char c;
+      short s;
   } Cool;
   
-  Cool c = {1, 012, 013, 'P'};
-  print_memory_contents("cool", sizeof(c), &c);
+  Cool c = {'a', 'b', 1, 1};
+  print_memory_contents("task 2 struct", sizeof(c), &c);
   
   return(0);
 }
