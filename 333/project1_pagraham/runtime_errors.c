@@ -26,13 +26,11 @@ int main(int argc, char *argv[]) {
 
 // Generate a "segmentation fault"
 runtime_error0() {
-  puts("ok");
   runtime_error0();
 }
 
 // Generate a "segmentation fault"
 runtime_error1() {
-  puts("ok2");
   puts((char*)1);
 }
 

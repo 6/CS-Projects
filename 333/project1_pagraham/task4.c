@@ -23,7 +23,7 @@ int task4() {
   while(1) {
     ptr = malloc(num_bytes);
     memset(ptr, 'a', num_bytes);
-    free(ptr);
+    //free(ptr);
   }
   
   return(0);
