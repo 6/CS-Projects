@@ -1,4 +1,4 @@
-@grey: #888;
+@grey: #999;
 @light-grey: #fafafa;
 @medium-grey: #ddd;
 
@@ -17,8 +17,9 @@
 
 // ELEMENTS
 body {
+  .mono-font;
   background:@light-grey;
-  padding:15px 20px;
+  padding:0 20px;
 }
 
 a {
@@ -41,19 +42,33 @@ a {
   .left;
   width: 50%;
   .half {
-    margin: 15px;
+    margin: 20px;
+  }
+  #output.half {
+    margin-left: 5px;
   }
 }
 
 .mono-font {
-  .small;
   font-family:"Bitstream Vera Sans Mono",Monaco,monospace;
+}
+
+.tip {
+  color: @grey;
+  .small;
+}
+
+#title {
+  .mono-font;
+  .medium;
+  margin: 10px 0;
 }
 
 #code {
   width: 100%;
   height: 350px;
   .mono-font;
+  .small;
 }
 
 #run-code-button {
@@ -62,15 +77,16 @@ a {
 
 #output {
   .mono-font;
+  .small;
   line-height: 1.3;
   padding: 10px;
-  background: #eefaff;
+  background: #f2fcff;
   border:1px solid #cde;
-  color: #57c;
+  color: #46b;
 }
 
 #output.error {
-  background: #fee;
+  background: #fff4f4;
   border:1px solid #ecc;
-  color: #c55;
+  color: #b33;
 }

@@ -36,4 +36,5 @@ $ ->
   $.fn.tabOverride.setTabSize 2
   $("#code").tabOverride()
   $("#code").focus()
+  $("#code").keydown (e) -> run_code() if e.which == 13 and e.metaKey
   $("#run-code-button").click run_code
