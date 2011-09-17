@@ -1,0 +1,34 @@
+@grey: #888;
+
+// CLASSES
+.center{margin:0 auto}
+.left{float:left}
+.right{float:right}
+.align-center{text-align:center}
+.align-right{text-align:right}
+.align-left{text-align:left}
+.x-large{font-size:19px}
+.large{font-size:15px}
+.medium{font-size:13px}
+.small{font-size:11px}
+.x-small{font-size:9px}
+
+// ELEMENTS
+body {
+  .center;
+}
+a {
+  text-decoration:none;
+  &:hover {
+    text-decoration:underline;
+  }
+}
+
+.wrap {
+  background:pink;
+  width:85%;
+  max-width:700px;
+}
+
+.header{color:#000}
+.subheader{color:@grey}
