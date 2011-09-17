@@ -1,6 +1,8 @@
 @grey: #888;
+@light-grey: #fafafa;
+@medium-grey: #ddd;
 
-// CLASSES
+// GENERIC CLASSES
 .center{margin:0 auto}
 .left{float:left}
 .right{float:right}
@@ -15,8 +17,10 @@
 
 // ELEMENTS
 body {
-  .center;
+  background:@light-grey;
+  padding:15px 20px;
 }
+
 a {
   text-decoration:none;
   &:hover {
@@ -24,11 +28,42 @@ a {
   }
 }
 
+// PAGE-SPECIFIC CLASSES
 .wrap {
-  background:pink;
-  width:85%;
-  max-width:700px;
+  .center;
+  background: #fff;
+  border:1px solid @medium-grey;
+  min-width:850px;
+  max-width:1100px;
 }
 
-.header{color:#000}
-.subheader{color:@grey}
+.half-wrap {
+  .left;
+  width: 50%;
+  .half {
+    margin: 15px;
+  }
+}
+
+.mono-font {
+  .small;
+  font-family:"Bitstream Vera Sans Mono",Monaco,monospace;
+}
+
+#code {
+  width: 100%;
+  height: 350px;
+  .mono-font;
+}
+
+#run-code-button {
+  margin-top:7px;
+}
+
+#output {
+  background: #eefaff;
+  border:1px solid #cde;
+  .mono-font;
+  color: #57c;
+  padding: 10px;
+}

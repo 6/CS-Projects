@@ -5,6 +5,7 @@ Peter Graham CS333
 <meta charset='utf-8'>
 <title></title>
 <link type='text/css' rel='stylesheet' href='lib/normalize.css'/>
+<link type='text/css' rel='stylesheet' href='lib/clear.css'/>
 <link rel='stylesheet/less' type='text/css' href='peter-lib/html-coffee.less'/>
 <script src='lib/jquery-1.6.4.min.js'></script>
 <script src='lib/coffee-script.js'></script>
@@ -14,12 +15,16 @@ Peter Graham CS333
 <script src='lib/haml.js'></script>
 <script type='text/coffeescript' src='peter-lib/html-coffee.coffee'></script>
 
-<!-- JS templates -->
+<!-- HAML template -->
 <script id='coffee-html-template' type='text/haml-template'>
-%h1 hihi
-%h2 hello
-%center.x-large
-  %p{style:'font-family:serif'} cool
+.wrap.clearfix
+  .half-wrap
+    .half
+      %textarea#code
+      %button#run-code-button Run code &rarr;
+  .half-wrap
+    #output.half
+      Code output goes here.
 </script>
 
 <!-- page-specific code below -->
