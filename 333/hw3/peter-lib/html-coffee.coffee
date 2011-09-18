@@ -20,6 +20,7 @@ run_code = ->
     $("#output").text error.message
     $("#output").addClass "error"
   $("#output").removeClass "error" unless has_error
+  $("#code").focus()
 
 load_template = ->
   template_fn = haml.compileHaml('coffee-html-template')
@@ -32,7 +33,8 @@ set_title = (title) ->
 $ ->
   load_template()
   set_title "CS333 - Homework 3"
-  $("#code").val ""
+  code_to_insert = _.trim $("#code-to-insert").text()
+  $("#code").val code_to_insert
   $.fn.tabOverride.setTabSize 2
   $("#code").tabOverride()
   $("#code").focus()
