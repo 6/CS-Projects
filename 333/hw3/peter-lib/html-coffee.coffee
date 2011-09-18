@@ -26,13 +26,12 @@ load_template = ->
   template_fn = haml.compileHaml('coffee-html-template')
   $("body").append template_fn({})
 
-set_title = (title) ->
+window.set_title = (title) ->
   $("title").text title
   $("#title").text title
 
 $ ->
   load_template()
-  set_title "CS333 - Homework 3"
   code_to_insert = _.trim $("#code-to-insert").text()
   $("#code").val code_to_insert
   $.fn.tabOverride.setTabSize 2

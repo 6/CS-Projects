@@ -30,8 +30,8 @@ Peter Graham CS333
       Code output goes here.
 </script>
 
-<p id="code-to-insert" class="hidden">
 <!-- page-specific code below -->
+<p id="code-to-insert" class="hidden">
 # based on pseudocode from:
 # http://en.wikipedia.org/wiki/Insertion_sort
 insertion_sort = (videos) ->
@@ -66,7 +66,11 @@ on_get_json = (data) ->
   print_info video for video in sorted_videos
 
 
-p "Loading most viewed YouTube videos via AJAX..."
+p "Loading trending YouTube videos via AJAX..."
 
 $.getJSON "https://gdata.youtube.com/feeds/api/standardfeeds/on_the_web?v=2&alt=json", on_get_json
+</p>
+<script type='text/coffeescript'>
+set_title "CS333 - Homework 3"
+</script>
     
