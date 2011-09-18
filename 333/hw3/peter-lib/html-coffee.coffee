@@ -7,8 +7,8 @@ terminal-like view.
 
 # output to the right-side output window
 window.p = ->
-	args = Array.prototype.slice.call(arguments)
-	$("#output").append "#{args.join(", ")}<br>"
+  args = Array.prototype.slice.call(arguments)
+  $("#output").append "#{args.join(", ")}<br>"
 
 run_code = ->
   try
