@@ -4,7 +4,7 @@
  */
 
 double sum = 0;
-}%
+%}
 
 DIGIT [0-9]
 INTEGER {DIGIT}+
