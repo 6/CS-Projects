@@ -4,7 +4,7 @@ int main()
 	int int1 = 42;
 	float flt0 = 5.3;
 			
-	if ( int0 < int1)
+	if ( int0 <= int1)
 	{
 		flt0 = flt0 + int1;
 	}
