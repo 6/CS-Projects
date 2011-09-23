@@ -15,11 +15,11 @@ int upper_start = 65;
 int upper_end = 90;
 %}
 
-CHARACTER [a-zA-Z]
+ALPHA [a-zA-Z]
 
 %%
 
-{CHARACTER} {
+{ALPHA} {
   int value = (int) yytext[0];
 
   int start,end;
@@ -38,13 +38,14 @@ CHARACTER [a-zA-Z]
   }
 
   char wrapped = new_value;
-  printf("char %c\n", wrapped);
+  printf("%c", wrapped);
 }
-.|\n
+.|\n printf("%s", yytext);
 
 %%
 
 int main(int argc, char** argv) {
+  // input text through stdin
   yyin = stdin;
 
   // run lexical analysis
