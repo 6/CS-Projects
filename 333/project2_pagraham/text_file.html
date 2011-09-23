@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+	<title>CS333: Lexical Analysis</title>
+	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+	<meta http-equiv="author" content="Brian Eastwood" />
+	<link rel="StyleSheet" href="styles.css" type="text/css" />
+</head>
+<body>
+
+<div id="banner">
+<h1>Programming Languages</h1>
+<h2>CS 333</h2>
+</div> <!-- banner -->
+
+<div class="navbar">
+<a href="img/iconP02.png">
+<img src="img/iconP02.png" alt="icon" />
+</a>
+<ul>
+<li><a href="/bseastwo/courses/F11/cs333/">Course Homepage</a></li>
+<li><a href="schedule.php">Schedule</a></li>
+<li><a href="homework.php#current">Homework</a></li>
+<li><a href="projects.php">Projects</a></li>
+<li><a href="links.php">Useful Links</a></li>
+<!-- <li><a href="CS398-LectureNotes.pdf">Lecture Notes</a></li> -->
+</ul>
+<ul>
+</ul>
+<ul>
+<li><a href="http://cs.colby.edu">CS Department</a></li>
+<li><a href="http://www.colby.edu">Colby College</a></li>
+</ul>
+</div>
+
+<div class="container">
+
+
+<div class="main">
+<h1>Project 2<br/>
+Lexical Analysis</h1>
+
+<h2>Overview</h2>
+
+<p>The first step in processing programs written in any language is lexical
+analysis&mdash;converting the sequence of characters in the program to a series
+of tokens.  This project involves working with the <tt>flex</tt> lexical
+analysis tool to build some simple parsers.</p>
+
+<p>Flex is an open-source lexical analysis tool.  It accepts as input a file
+that defines symbols and production rules for parsing a text file.  The output
+from flex is a C file that can be built and executed with another input
+stream.</p>
+
+<p>The production rules in flex are snippets of C code.  Consider the following
+example flex input that defines a single rule that replaces instances of
+<tt>blah</tt> with the text <tt>hello world</tt>.</p>
+
+<pre>
+%%
+blah    printf("hello world");
+%%
+
+int main(int argc, char *argv[]) 
+{
+    yylex();
+}
+</pre>
+
+<p>Assume the above is the contents of the file <tt>replace.yy</tt>.  The
+following sequence of commands provides an example of how to use this simple
+parser.</p>
+<pre>
+$ flex replace.yy
+$ gcc -o repl lex.yy.c -lfl
+$ echo "blah and another blah" | ./repl
+hello world and another hello world
+</pre>
+
+<p>The <tt>-lfl</tt> option to <tt>gcc</tt> links the flex library during
+compilation.  The <tt>echo "..." |</tt> command sends the text in quotes as
+standard input to the <tt>repl</tt> program.</p>
+
+The <a href="http://dinosaur.compilertools.net/flex">flex documentation</a>
+provides many examples and a description of the syntax.  Note that flex
+matching rules are based on regular expressions, which are similar to the
+extended BNF notation we have discussed in class.  There is a lot of
+documentation for <a href="http://www.regular-expressions.info/">regular
+expressions</a>, which can be useful in many <a
+href="http://xkcd.com/208/">situations</a>.
+
+<h2>Tasks</h2>
+
+<ol class="space">
+<li>Using flex, make a program called <tt>encode</tt> that takes any character
+in a-z or A-Z and shifts it 13 spaces forward in the alphabet, with wrap-around
+from z back to a. Run it on this file. You can test that it is working
+correctly by running the output of encode through <tt>encode</tt> again. The
+result should be the original document.</li>
+
+<li>Using flex, make a program that reads in a text file and tells you not only
+the number of rows and characters, but also how many of each vowel [a, e, i, o,
+u] are in the file.</li>
+
+<li>Make a program that strips an html file of all tags, comments, and extra
+whitespace. It should leave a blank line wherever there used to be a &lt;p&gt;
+tag, and it should leave spaces between words intact. In other words, it should
+generate a plain text version of a web page. Test it on the source of this web
+page.
+
+<p>Note that this is challenging to do in a way that makes the output reasonably
+formatted. As an extension, you can make your program do more sophisticated
+things like replace &amp;gt; with &gt;.</p>
+</li>
+
+<li>Implement a simple lexical parser for Clite. The output of your program
+should just be a sequence of strings, one per line. Use the following strings
+in the output.
+
+<table>
+<tr>
+<td>Integer-&lt;value&gt;</td><td>A sequence of one or more digits.</td>
+</tr>
+<tr>
+<td>Float-&lt;value&gt;</td><td>An integer, a dot, and another integer.</td>
+</tr>
+<tr>
+<td>Keyword-&lt;word&gt;</td>
+<td>if | else | while | for | bool | char | int | float</td>
+</tr>
+<tr>
+<td>Identifier-&lt;name&gt;</td><td>Legal names/identifiers.</td>
+</tr>
+<tr>
+<td>Assignment</td><td> = </td>
+</tr>
+<tr>
+<td>Comparison-&lt;symbol&gt;</td><td>== | &lt; | &gt; | &lt;= | &gt;=</td>
+</tr>
+<tr>
+<td>Operator-&lt;symbol&gt;</td><td>+ | - | * | / | % </td>
+</tr>
+<tr>
+<td>Open-bracket</td><td> { </td>
+</tr>
+<tr>
+<td>Close-bracket</td><td> } </td>
+</tr>
+<tr>
+<td>Open-paren</td><td> ( </td>
+</tr>
+<tr>
+<td>Close-paren</td><td> ) </td>
+</tr>
+<tr>
+<td>Semicolon</td><td> ; </td>
+</tr>
+</table>
+
+<p>You can test your program on this <a href="download/example.c">example</a>.
+You should get something like this
+<a href="download/parseout.txt">result</a>.</p>
+</li>
+</ol>
+
+<h2>Extension Ideas</h2>
+
+<ul class="space">
+<li>Make the encoder more complex.</li>
+<li>Make the program for analyzing a document do some more interesting
+things.  For example, create better formatted output.</li>
+<li>Handle comments properly in the parser. Be sure to try out a variety of
+examples.</li>
+<li>Handle more of the Clite syntax.</li>
+</ul>
+
+<h2>Write-up</h2>
+
+<p>Follow Dr. Maxwell's write-up instructions (<a
+href="/maxwell/courses/generic/writeupInstructions.php">here</a>) to create a
+web page for this assignment. <em>Answer each of the questions that appears
+above somewhere in the write-up.</em></p>
+
+<p>The target audience for the write-up is your fellow students. With a
+possible exception of theory and algorithms you describe, your discussions
+should be clear for a CS student not taking this course. Send the instructor an
+email with the code in a zip/tar file along with instructions for running the
+program and a link to your write-up page.</p>
+
+</div>
+
+</div> <!-- container -->
+
+<div id="footer">
+<p>&copy; 2010 &ndash; 2011 Brian S. Eastwood, Bruce A. Maxwell</p>
+
+</div> <!-- footer -->
+
+</body>
+</html>
