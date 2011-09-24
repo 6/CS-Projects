@@ -25,7 +25,7 @@ SEMICOLON ;
 INTEGER [0-9]+
 FLOAT {INTEGER}\.{INTEGER}
 
-/* Valid identifier according to Tucker Noonan textbook p 61 */
+/* Valid identifier according to Tucker Noonan textbook p 38 */
 IDENTIFIER [[:alpha:]][[:alnum:]]+
 
 %%
