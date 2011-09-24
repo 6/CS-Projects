@@ -5,7 +5,13 @@
  * A simple lexical parser for Clite. The output of your program is a sequence
  * of strings (one per line) specifying the tokens found.
  */
+int inside_comment = 0;
 %}
+
+INLINE_COMMENT \/\/.*$
+/* Flex doesn't support negative lookahead, so do this the slow way */
+MULTILINE_COMMENT_START \/\*
+MULTILINE_COMMENT_END \*\/
 
 KEYWORD (if|else|while|for|bool|char|int|float)
 
@@ -20,33 +26,45 @@ INTEGER [0-9]+
 FLOAT {INTEGER}\.{INTEGER}
 
 /* Valid identifier according to Tucker Noonan textbook p 61 */
-IDENTIFIER [a-zA-Z][a-zA-Z0-9]+
+IDENTIFIER [[:alpha:]][[:alnum:]]+
 
 %%
 
-{BRACKET_OR_PAREN} {
-  if(strcmp(yytext, "{") == 0)
-    puts("Open-bracket");
-  else if(strcmp(yytext, "}") == 0)
-    puts("Close-bracket");
-  else if(strcmp(yytext, "(") == 0)
-    puts("Open-paren");
-  else
-    puts("Close-paren");
+{INLINE_COMMENT} if(inside_comment == 0) printf("Inline-comment-%s\n", yytext);
+{MULTILINE_COMMENT_START} {
+  inside_comment = 1;
+  puts("Open-multiline-comment");
+}
+{MULTILINE_COMMENT_END} {
+  inside_comment = 0;
+  puts("Close-multiline-comment");
 }
 
-{SEMICOLON} puts("Semicolon");
+{BRACKET_OR_PAREN} {
+  if(inside_comment == 0) {
+    if(strcmp(yytext, "{") == 0)
+      puts("Open-bracket");
+    else if(strcmp(yytext, "}") == 0)
+      puts("Close-bracket");
+    else if(strcmp(yytext, "(") == 0)
+      puts("Open-paren");
+    else
+      puts("Close-paren");
+  }
+}
 
-{OPERATOR} printf("Operator-%s\n", yytext);
-{COMPARISON} puts("Comparison");
-{ASSIGNMENT} puts("Assignment");
+{SEMICOLON} if(inside_comment == 0) puts("Semicolon");
 
-{KEYWORD} printf("Keyword-%s\n", yytext);
+{OPERATOR} if(inside_comment == 0) printf("Operator-%s\n", yytext);
+{COMPARISON} if(inside_comment == 0) puts("Comparison");
+{ASSIGNMENT} if(inside_comment == 0) puts("Assignment");
 
-{FLOAT} printf("Float-%s\n", yytext);
-{INTEGER} printf("Integer-%s\n", yytext);
+{KEYWORD} if(inside_comment == 0) printf("Keyword-%s\n", yytext);
 
-{IDENTIFIER} printf("Identifier-%s\n", yytext);
+{FLOAT} if(inside_comment == 0) printf("Float-%s\n", yytext);
+{INTEGER} if(inside_comment == 0) printf("Integer-%s\n", yytext);
+
+{IDENTIFIER} if(inside_comment == 0) printf("Identifier-%s\n", yytext);
 .|\n
 
 %%
