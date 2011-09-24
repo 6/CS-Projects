@@ -56,7 +56,7 @@ IDENTIFIER [[:alpha:]][[:alnum:]]+
 {SEMICOLON} if(inside_comment == 0) puts("Semicolon");
 
 {OPERATOR} if(inside_comment == 0) printf("Operator-%s\n", yytext);
-{COMPARISON} if(inside_comment == 0) puts("Comparison");
+{COMPARISON} if(inside_comment == 0) printf("Comparison-%s\n", yytext);
 {ASSIGNMENT} if(inside_comment == 0) puts("Assignment");
 
 {KEYWORD} if(inside_comment == 0) printf("Keyword-%s\n", yytext);
