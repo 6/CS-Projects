@@ -1,3 +1,8 @@
+// /* not a multiline comment */
+/*
+ * Comment // not an inline comment
+ * 1
+ */
 int main()
 {
 	int int0 = 6;
@@ -6,6 +11,8 @@ int main()
 			
 	if ( int0 <= int1)
 	{
-		flt0 = flt0 + int1;
+        // inline comment 2
+		flt0 = flt0 + int1; // inline comment 3 == not comparison
 	}
 }
+/******* COMMENT4 ********/
