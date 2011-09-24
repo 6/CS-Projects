@@ -11,11 +11,7 @@ int rows = 0;
 int characters = 0;
 
 // assign counts of each vowel to 0
-int a = 0;
-int e = 0;
-int i = 0;
-int o = 0;
-int u = 0;
+int a = 0, e = 0, i = 0, o = 0, u = 0;
 %}
 
 VOWEL [aeiouAEIOU]
@@ -32,7 +28,7 @@ VOWEL [aeiouAEIOU]
     case 'u': u++;
   }
 }
-\n rows++;
+\n rows++; characters++;
 . characters++;
 
 %%
@@ -46,7 +42,7 @@ int main(int argc, char** argv) {
   yyin = fopen(argv[1], "r");
   yylex();
 
-  printf("Rows: %d\nCharacters (excluding \\n): %d\n", rows, characters);
+  printf("Rows: %d\nCharacters (including \\n): %d\n", rows, characters);
   puts("\nVowel counts:");
   printf("a:%d, e:%d, i:%d, o:%d, u:%d\n", a, e, i, o, u);
 }
