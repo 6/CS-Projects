@@ -6,8 +6,11 @@
  * many of each vowel [a, e, i, o, u] are in the file.
  */
 
-// row and character counts
-int rows = 0;
+/*
+ * Initialize row and character counts.
+ * Note: rows will always be one more than the number of \n, so start count at 1
+ */
+int rows = 1;
 int characters = 0;
 
 // assign counts of each vowel to 0
@@ -27,6 +30,7 @@ VOWEL [aeiouAEIOU]
     case 'o': o++;
     case 'u': u++;
   }
+  characters++;
 }
 \n rows++; characters++;
 . characters++;
