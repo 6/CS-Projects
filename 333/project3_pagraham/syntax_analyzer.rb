@@ -18,9 +18,28 @@ class Token
   end
 end
 
-t = Token.new "what"
-t.val = "hoo"
-t2 = Token.new "what", "foo"
-puts t
-puts t2
-puts t.equals?(t2)
+class Lexer
+  def initialize(token_file)
+  end
+
+  def next_token
+  end
+
+  def current_token
+  end
+end
+
+class Parser
+  def initialize(lexer)
+    @lexer = lexer
+  end
+
+  def match(token)
+  end
+
+  def error(token)
+  end
+
+  def any_of?(tokens)
+  end
+end
