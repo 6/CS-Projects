@@ -6,13 +6,17 @@
  * blank line wherever there used to be a <p> tag, and it leaves spaces between
  * words intact.
  */
+// keep track of if we're inside an HTML comment or not
+int inside_comment = 0;
 %}
 
 WHITESPACE [ \t\n\r]
 
-TAG_OR_COMMENT <[^>]+>
+COMMENT_START <!--
+COMMENT_END -->
+TAG <[^>]+>
 
-WHITESPACE_TO_STRIP {TAG_OR_COMMENT}{WHITESPACE}+|{WHITESPACE}+{TAG_OR_COMMENT}
+WHITESPACE_TO_STRIP {TAG}{WHITESPACE}+|{COMMENT_END}{WHITESPACE}+|{WHITESPACE}+{TAG}|{WHITESPACE}+{COMMENT_START}
 
 /* 
  * This will catch edge-cases such as:
@@ -25,28 +29,33 @@ HTML_ENTITY &[a-zA-Z]+;
 
 %%
 
+{COMMENT_START} inside_comment = 1;
+{COMMENT_END} inside_comment = 0;
+
 {P_TAG} {
-  puts("");
+  if(inside_comment == 0) puts("");
 }
 
-{TAG_OR_COMMENT} // print nothing
+{TAG} // print nothing
 {WHITESPACE_TO_STRIP} // print nothing
 
 {HTML_ENTITY} {
-  if(strcmp(yytext, "&lt;") == 0)
-    printf("<");
-  else if(strcmp(yytext, "&gt;") == 0)
-    printf(">");
-  else if(strcmp(yytext, "&copy;") == 0)
-    printf("Copyright");
-  else if(strcmp(yytext, "&ndash;") == 0)
-    printf("-");
-  else if(strcmp(yytext, "&mdash;") == 0)
-    printf("--");
-  else if(strcmp(yytext, "&amp;") == 0)
-    printf("&");
-  else
-    printf("%s", yytext);
+  if(inside_comment == 0) {
+    if(strcmp(yytext, "&lt;") == 0)
+      printf("<");
+    else if(strcmp(yytext, "&gt;") == 0)
+      printf(">");
+    else if(strcmp(yytext, "&copy;") == 0)
+      printf("Copyright");
+    else if(strcmp(yytext, "&ndash;") == 0)
+      printf("-");
+    else if(strcmp(yytext, "&mdash;") == 0)
+      printf("--");
+    else if(strcmp(yytext, "&amp;") == 0)
+      printf("&");
+    else
+      printf("%s", yytext);
+  }
 }
 
 %%
