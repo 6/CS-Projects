@@ -24,11 +24,11 @@ VOWEL [aeiouAEIOU]
 {VOWEL} {
   char lower_vowel = tolower(yytext[0]);
   switch(lower_vowel) {
-    case 'a': a++;
-    case 'e': e++;
-    case 'i': i++;
-    case 'o': o++;
-    case 'u': u++;
+    case 'a': a++; break;
+    case 'e': e++; break;
+    case 'i': i++; break;
+    case 'o': o++; break;
+    case 'u': u++; break;
   }
   characters++;
 }
