@@ -16,14 +16,14 @@ COMMENT_START <!--
 COMMENT_END -->
 TAG <[^>]+>
 
-WHITESPACE_TO_STRIP {TAG}{WHITESPACE}+|{COMMENT_END}{WHITESPACE}+|{WHITESPACE}+{TAG}|{WHITESPACE}+{COMMENT_START}
-
 /* 
  * This will catch edge-cases such as:
  * <p />
- * <p class="a" id="b">
+ * <P class="a" id="b">
  */
 P_TAG <[pP]({WHITESPACE}[^>]*)?\/?>
+
+WHITESPACE_TO_STRIP {WHITESPACE}+
 
 HTML_ENTITY &[a-zA-Z]+;
 
@@ -32,12 +32,10 @@ HTML_ENTITY &[a-zA-Z]+;
 {COMMENT_START} inside_comment = 1;
 {COMMENT_END} inside_comment = 0;
 
-{P_TAG} {
-  if(inside_comment == 0) puts("");
-}
+{P_TAG} if(inside_comment == 0) puts("\n");
 
 {TAG} // print nothing
-{WHITESPACE_TO_STRIP} // print nothing
+{WHITESPACE_TO_STRIP} printf(" "); // replace multiple whitespace with one space
 
 {HTML_ENTITY} {
   if(inside_comment == 0) {
