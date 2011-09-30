@@ -49,4 +49,9 @@ int main(int argc, char** argv) {
   printf("Rows: %d\nCharacters (including \\n): %d\n", rows, characters);
   puts("\nVowel counts:");
   printf("a:%d, e:%d, i:%d, o:%d, u:%d\n", a, e, i, o, u);
+
+	int vowels = a+e+i+o+u;
+	printf("\nTotal vowels: %d\n", vowels);
+	printf("Average characters per row: %f\n", (float)characters/(float)rows);
+	printf("Average vowels per row: %f\n", (float)vowels/(float)rows);
 }
