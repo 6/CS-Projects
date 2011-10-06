@@ -1,5 +1,6 @@
 fs = require 'fs'
 p = console.log
+Const = require('./constants').Constants
 
 class Token
   # Represent tokens coming from lexical analysis. Has a type and optional value
@@ -24,9 +25,14 @@ class Lexer
   constructor: (@tokenStrings, @delimiter) ->
     @currToken
 
-  # Reads the next token string, splits based on the delimiter character and
-  # builds a new Token object. Sets @currToken to this new Token object
+  ###
+  Reads the next token string, splits based on the delimiter character and
+  builds a new Token object. Sets @currToken to this new Token object. If at the
+  end of the file, create a special Token object
+  ###
   nextToken: () ->
+    if @tokenStrings.length == 0
+      return @currToken = new Token Const.END
     [tokenType, value] = @tokenStrings.shift().split @delimiter
     @currToken = new Token tokenType, value
 
@@ -71,13 +77,11 @@ readFileAsync = (filename, callback, callbackArgs...) ->
       p "Error reading file: #{filename}. Exiting."
       process.exit 1
 
-# Run the parser given a list of token strings that represent the token stream
+# Run the parser given a list of token strings and their delimiter
 runParser = (tokenStrings, delimiter) ->
   lexer = new Lexer tokenStrings, delimiter
   parser = new Parser lexer
-  for i in [1..tokenStrings.length]
-    lexer.nextToken()
-    p lexer.currToken.toS()
+  p lexer.currToken.toS() until lexer.nextToken().isEqual(new Token Const.END)
 
 # Main method expects a filename to be passed in through command line
 exports.main = (argv) ->
