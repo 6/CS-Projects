@@ -1,0 +1,7 @@
+Prerequisites:
+* Node.JS >= 0.4 http://nodejs.org
+* NPM http://npmjs.org/
+
+Once you have the above, run the following commands, where "filename" is the name of the tokens file outputted by flex:
+$ npm install
+$ node run.js filename
