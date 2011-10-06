@@ -5,5 +5,5 @@ Prerequisites:
 Next, run the following to install required packages (this will install CoffeeScript):
 $ npm install
 
-To run the syntax analyzer, run the following ("filename" is the name of the tokens file outputted by flex):
-$ node run.js filename
+To run the syntax analyzer, run the following (replace "filename" with the name of the tokens file outputted by flex, and replace "delimiter" with the delimiter used for token strings):
+$ node run.js filename delimiter

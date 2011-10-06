@@ -63,17 +63,17 @@ class Parser
     false
 
 # Read a file asynchronously and pass the contents to the callback function
-readFileAsync = (filename, callback) ->
+readFileAsync = (filename, callback, callbackArgs...) ->
   fs.readFile filename, (error, contents) ->
     if contents?
-      callback contents.toString().split("\n")
+      callback contents.toString().split("\n"), callbackArgs...
     else
       p "Error reading file: #{filename}. Exiting."
       process.exit 1
 
 # Run the parser given a list of token strings that represent the token stream
-runParser = (tokenStrings) ->
-  lexer = new Lexer tokenStrings, "$"
+runParser = (tokenStrings, delimiter) ->
+  lexer = new Lexer tokenStrings, delimiter
   parser = new Parser lexer
   for i in [1..tokenStrings.length]
     lexer.nextToken()
@@ -81,8 +81,8 @@ runParser = (tokenStrings) ->
 
 # Main method expects a filename to be passed in through command line
 exports.main = (argv) ->
-  filename = argv[2]
-  unless filename?
-    p "Please specify a filename. Exiting."
+  [filename, delimiter] = [argv[2], argv[3]]
+  unless filename? and delimiter
+    p "Please specify a filename and delimiter. Exiting."
     process.exit 1
-  readFileAsync filename, runParser
+  readFileAsync filename, runParser, delimiter
