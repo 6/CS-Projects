@@ -1,0 +1,6 @@
+Keyword$int
+Identifier$main
+Open(
+Close)
+Open{
+Close}
