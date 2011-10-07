@@ -1,8 +1,6 @@
 fs = require 'fs'
 p = console.log
 abstract = require './abstract_classes'
-constants = require './constants'
-[Tokens, Operators] = [constants.Tokens, constants.Operators]
 
 class Token
   # Represent tokens coming from lexical analysis. Has a type and optional value
@@ -71,11 +69,11 @@ class Parser
     false
     
   parse: () ->
-    @lexer.nextToken() # go to the first token
+    @lexer.nextToken() # advance to the first token
     this.program().printTree("")
     
   program: () ->
-    this.match(new Token "Keyword", Tokens.INT)
+    this.match(new Token "Keyword", "int")
     this.match(new Token "Identifier", "main")
     this.match(new Token "Open(")
     this.match(new Token "Close)")
@@ -83,10 +81,26 @@ class Parser
     decpart = this.declarations()
     body = this.statements()
     this.match(new Token "Close}")
-    return new abstract.Program decpart, body
+    this.match(new Token Tokens.END)
+    new abstract.Program decpart, body
   
-  declarations: () -> []
+  declarations: () ->
+    decs = []
+    decs = decs.concat this.declaration() while this.anyOf(Tokens.Keywords)
+    decs
+
+  declaration: () ->
+    tokenType = new abstract.Type this.match(new Token "Keyword")
+    identifier = new abstract.Variable this.match(new Token "Identifier")
+    this.match(new Token "Semicolon")
+    new abstract.Declaration tokenType, identifier
+  
   statements: () -> []
+
+# Constants
+Tokens =
+  Keywords: [new Token "Keyword", "int", new Token "Keyword", "float"]
+  END: "END"
 
 # Read a file asynchronously and pass the contents to the callback function
 readFileAsync = (filename, callback, callbackArgs...) ->
