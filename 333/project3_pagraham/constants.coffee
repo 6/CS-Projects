@@ -1,8 +1,8 @@
 # Define some constants for Tokens and Operators
 exports.Tokens =
-  INT: "INT"
-  FLOAT: "FLOAT"
-  CHAR: "CHAR"
+  INT: "int"
+  FLOAT: "float"
+  CHAR: "char"
   END: "END"
   
 exports.Operators =
