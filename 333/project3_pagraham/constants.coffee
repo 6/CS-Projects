@@ -1,12 +1,11 @@
 # Define some constants for Tokens and Operators
-exports.Constants =
-  # Tokens
+exports.Tokens =
   INT: "INT"
   FLOAT: "FLOAT"
   CHAR: "CHAR"
   END: "END"
   
-  # Operators
+exports.Operators =
   ADD: "+"
   SUBTRACT: "-"
   MULTIPLY: "*"

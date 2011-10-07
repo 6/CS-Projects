@@ -1,6 +1,7 @@
 fs = require 'fs'
 p = console.log
-Const = require('./constants').Constants
+constants = require './constants'
+[Tokens, Operators] = [constants.Tokens, constants.Operators]
 
 class Token
   # Represent tokens coming from lexical analysis. Has a type and optional value
@@ -32,7 +33,7 @@ class Lexer
   ###
   nextToken: () ->
     if @tokenStrings.length == 0
-      return @currToken = new Token Const.END
+      return @currToken = new Token Tokens.END
     [tokenType, value] = @tokenStrings.shift().split @delimiter
     @currToken = new Token tokenType, value
 
@@ -67,6 +68,10 @@ class Parser
     for token in tokens
       return true if token.tokenType == @lexer.currToken.tokenType
     false
+  
+  constructTree: () ->
+    until @lexer.nextToken().isEqual(new Token Tokens.END)
+      p @lexer.currToken.toS()
 
 # Read a file asynchronously and pass the contents to the callback function
 readFileAsync = (filename, callback, callbackArgs...) ->
@@ -81,7 +86,7 @@ readFileAsync = (filename, callback, callbackArgs...) ->
 runParser = (tokenStrings, delimiter) ->
   lexer = new Lexer tokenStrings, delimiter
   parser = new Parser lexer
-  p lexer.currToken.toS() until lexer.nextToken().isEqual(new Token Const.END)
+  parser.constructTree()
 
 # Main method expects a filename to be passed in through command line
 exports.main = (argv) ->
