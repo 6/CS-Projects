@@ -1,5 +1,6 @@
 fs = require 'fs'
 p = console.log
+abstract = require './abstract_classes'
 constants = require './constants'
 [Tokens, Operators] = [constants.Tokens, constants.Operators]
 
@@ -57,7 +58,7 @@ class Parser
   expected one token but saw the Lexer's current token instead
   ###
   error: (token) ->
-    p "Expected #{@lexer.currToken.toS()}, found #{token.toS()}. Exiting."
+    p "Expected #{token.toS()}, found #{@lexer.currToken.toS()}. Exiting."
     process.exit 1
   
   ###
@@ -68,10 +69,24 @@ class Parser
     for token in tokens
       return true if token.tokenType == @lexer.currToken.tokenType
     false
+    
+  parse: () ->
+    @lexer.nextToken() # go to the first token
+    this.program().printTree("")
+    
+  program: () ->
+    this.match(new Token "Keyword", Tokens.INT)
+    this.match(new Token "Identifier", "main")
+    this.match(new Token "Open(")
+    this.match(new Token "Close)")
+    this.match(new Token "Open{")
+    decpart = this.declarations()
+    body = this.statements()
+    this.match(new Token "Close}")
+    return new abstract.Program decpart, body
   
-  constructTree: () ->
-    until @lexer.nextToken().isEqual(new Token Tokens.END)
-      p @lexer.currToken.toS()
+  declarations: () -> []
+  statements: () -> []
 
 # Read a file asynchronously and pass the contents to the callback function
 readFileAsync = (filename, callback, callbackArgs...) ->
@@ -82,11 +97,11 @@ readFileAsync = (filename, callback, callbackArgs...) ->
       p "Error reading file: #{filename}. Exiting."
       process.exit 1
 
-# Run the parser given a list of token strings and their delimiter
-runParser = (tokenStrings, delimiter) ->
+# Print out the AST of given a list of token strings and their delimiter
+printTree = (tokenStrings, delimiter) ->
   lexer = new Lexer tokenStrings, delimiter
   parser = new Parser lexer
-  parser.constructTree()
+  parser.parse()
 
 # Main method expects a filename to be passed in through command line
 exports.main = (argv) ->
@@ -94,4 +109,4 @@ exports.main = (argv) ->
   unless filename? and delimiter
     p "Please specify a filename and delimiter. Exiting."
     process.exit 1
-  readFileAsync filename, runParser, delimiter
+  readFileAsync filename, printTree, delimiter
