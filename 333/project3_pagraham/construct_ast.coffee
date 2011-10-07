@@ -7,7 +7,7 @@ class Token
   constructor: (@tokenType, @value) ->
   
   # Print out the Token in a readable manner
-  toS: () -> if @value then "<#{@tokenType}:#{@value}>" else "<#{@tokenType}>"
+  toS: () -> if @value then "#{@tokenType}: #{@value}" else @tokenType
   
   ###
   Compares type (and value if applicable) of param token and this token object.
@@ -95,12 +95,33 @@ class Parser
     this.match(new Token "Semicolon")
     new abstract.Declaration tokenType, identifier
   
-  statements: () -> []
+  statements: () ->
+    stmts = []
+    numOpenBrackets = 1
+    while numOpenBrackets >= 1
+      if @lexer.currToken.isEqual(new Token "Open{")
+        numOpenBrackets += 1
+      else if @lexer.currToken.isEqual(new Token "Close}")
+        numOpenBrackets -= 1
+      else stmts.concat this.statement()
+    stmts
+  
+  statement: () -> "yo"
+    
 
 # Constants
 Tokens =
-  Keywords: [new Token "Keyword", "int", new Token "Keyword", "float"]
+  Keywords: [new Token("Keyword", "int"), new Token("Keyword", "float")]
+  OpsAdd: [new Token("Operator", "+"), new Token("Operator", "-")]
+  OpsMultiply: [new Token("Operator", "*"), new Token("Operator", "/")]
+  OpsEquality: [new Token("Comparison", "==")]
   END: "END"
+
+Tokens2 =
+  OpsArithmetic: Tokens.OpsAdd.concat Tokens.OpsMultiply 
+
+# Merge newer constants with the origin Tokens hash
+Tokens[key] ?= val for key,val of Tokens2
 
 # Read a file asynchronously and pass the contents to the callback function
 readFileAsync = (filename, callback, callbackArgs...) ->

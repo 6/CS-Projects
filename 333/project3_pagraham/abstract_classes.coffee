@@ -22,10 +22,10 @@ class exports.Type
   constructor: (@keyword) ->
   
   printTree: (indent) ->
-    p "#{indent} Type: #{@keyword.toS()}"
+    p "#{indent}|-Type: #{@keyword.value}"
 
 class exports.Variable
   constructor: (@identifier) ->
   
   printTree: (indent) ->
-    p "#{indent} Variable: #{@identifier.toS()}"
+    p "#{indent}|-#{@identifier.toS()}"
