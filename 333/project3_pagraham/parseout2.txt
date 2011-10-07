@@ -1,0 +1,12 @@
+Keyword$int
+Identifier$main
+Open(
+Close)
+Open{
+Keyword$int
+Identifier$int0
+Semicolon
+Keyword$float
+Identifier$flt0
+Semicolon
+Close}
