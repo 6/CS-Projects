@@ -1,7 +1,7 @@
 Keyword$int
 Identifier$main
 Open(
-Close(
+Close)
 Open{
 Keyword$int
 Identifier$int0
@@ -23,7 +23,7 @@ Open(
 Identifier$int0
 Comparison$<
 Identifier$int1
-Close{
+Close)
 Open{
 Identifier$flt0
 Assignment
@@ -31,5 +31,5 @@ Identifier$flt0
 Operator$+
 Identifier$int1
 Semicolon
-Close{
-Close{
+Close}
+Close}
