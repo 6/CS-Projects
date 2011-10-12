@@ -103,11 +103,26 @@ class Parser
         numOpenBrackets += 1
       else if @lexer.currToken.isEqual(new Token "Close}")
         numOpenBrackets -= 1
-      else stmts.concat this.statement()
+      else stmts = stmts.concat this.statement()
     stmts
   
-  statement: () -> "yo"
-    
+  statement: () ->
+    if @lexer.currToken.isEqual(new Token "Keyword", "if")
+      return this.ifStatement()
+    else this.assignment()
+  
+  ifStatement: () ->
+    "TODO"
+
+  assignment: () ->
+    identifier = this.match(new Token "Identifier")
+    this.match(new Token "Assignment")
+    this.error(new Token "Literal") unless this.anyOf Tokens.Literals
+    val = @lexer.currToken
+    @lexer.nextToken()
+    this.match(new Token "Semicolon")
+    new abstract.Assignment identifier, val
+
 
 # Constants
 Tokens =
@@ -115,6 +130,7 @@ Tokens =
   OpsAdd: [new Token("Operator", "+"), new Token("Operator", "-")]
   OpsMultiply: [new Token("Operator", "*"), new Token("Operator", "/")]
   OpsEquality: [new Token("Comparison", "==")]
+  Literals: [new Token("Float"), new Token("Integer")]
   END: "END"
 
 Tokens2 =

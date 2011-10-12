@@ -29,3 +29,11 @@ class exports.Variable
   
   printTree: (indent) ->
     p "#{indent}|-#{@identifier.toS()}"
+
+class exports.Assignment
+  constructor: (@identifier, @val) ->
+  
+  printTree: (indent) ->
+    p "#{indent}|-Assignment"
+    p "#{indent}|  |-Variable: #{@identifier.toS()}"
+    #TODO
