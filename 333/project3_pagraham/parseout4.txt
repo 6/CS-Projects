@@ -39,5 +39,7 @@ Assignment
 Integer$47
 Operator$+
 Integer$48
+Operator$+
+Integer$40
 Semicolon
 Close}

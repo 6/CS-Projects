@@ -33,7 +33,7 @@ class exports.Parser
   ###
   anyOf: (tokens) ->
     for token in tokens
-      return true if token.tokenType == @lexer.currToken.tokenType
+      return true if token.isEqual @lexer.currToken
     false
     
   program: () ->
@@ -99,23 +99,26 @@ class exports.Parser
   assignment: () ->
     identifier = this.match(new Token "Identifier")
     this.match(new Token "Assignment")
-    expression = this.expression()
+    expr = this.expression()
     this.match(new Token "Semicolon")
-    new abstract.Assignment identifier, expression
+    new abstract.Assignment identifier, expr
 
   expression: () ->
-    numOpenParens = 0
-    while not this.anyOf([new Token("Semicolon"), new Token("Close")]) or numOpenParens > 0
-      if this.anyOf(new Token "Open(")
-        numOpenParens += 1
-      else if this.anyOf(new Token "Close)")
-        numOpenParens -= 1
+    #while this.anyOf(Tokens.Literals) or this.anyOf([new Token "Identifier"]) or this.anyOf(Tokens.Binary) or this.anyOf(Tokens.Unary)
+    this.addition()
+      
+  equality: () ->
+    add = this.addition()
+    if this.anyOf(Tokens.OpsEquality)
+      eq = new abstract.Operator this.match(new Token "Operator")
+      add2 = this.addition()
+    new abstract.Equality add, eq, add2
 
   term: () ->
     fct = this.factor()
     # Optional multiplication or division
     while this.anyOf(Tokens.OpsMultiply)
-      mulOp = this.match(new Token "Operator")
+      mulOp = new abstract.Operator this.match(new Token "Operator")
       fct2 = this.factor()
       fct = new abstract.Binary fct, mulOp, fct2
     fct
@@ -124,14 +127,14 @@ class exports.Parser
     prm = this.primary()
     # Optional unary operator
     if this.anyOf(Tokens.Unary)
-      unary = this.match(new Token "Operator")
+      unary = new abstract.Operator this.match(new Token "Operator")
       prm = new abstract.Unary unary, prm
     prm
     
   addition: () ->
     trm = this.term()
     while this.anyOf(Tokens.OpsAdd)
-      addOp = this.match(new Token "Operator")
+      addOp = new abstract.Operator this.match(new Token "Operator")
       trm2 = this.term()
       trm = new abstract.Binary trm, addOp, trm2
     trm
