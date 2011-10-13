@@ -1,2 +1,2 @@
 require("coffee-script");
-require("./ast_constructor").main(process.argv);
+require("./run_coffee").main(process.argv);
