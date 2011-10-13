@@ -11,12 +11,12 @@ class exports.Program
     stmt.printTree("#{indent}  |  ") for stmt in @body
 
 class exports.Declaration
-  constructor: (@varType, @identifier) ->
+  constructor: (@type, @identifier) ->
 
   printTree: (indent) ->
     p "#{indent}|-Declaration"
     @identifier.printTree("#{indent}|  ")
-    @varType.printTree("#{indent}|  ")
+    @type.printTree("#{indent}|  ")
 
 class exports.Type
   constructor: (@keyword) ->
@@ -31,7 +31,7 @@ class exports.Variable
     p "#{indent}|-#{@identifier.toS()}"
 
 class exports.Assignment
-  constructor: (@identifier, @val) ->
+  constructor: (@identifier, @value) ->
   
   printTree: (indent) ->
     p "#{indent}|-Assignment"
