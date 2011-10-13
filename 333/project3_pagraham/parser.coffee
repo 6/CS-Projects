@@ -99,9 +99,11 @@ class exports.Parser
     expr = null
     if this.anyOf(Tokens.Literals)
       expr = new abstract.Value @lexer.currToken
+      @lexer.nextToken()
     else if this.anyOf(Tokens.Unary) or this.anyOf(Tokens.Binary)
       expr = "TODO"
-    else #variableRef
-      expr = "TODO"
-    @lexer.nextToken()
+      @lexer.nextToken()
+    else
+      # Expression is a VariableRef
+      expr = new abstract.Variable this.match(new Token "Identifier")
     expr
