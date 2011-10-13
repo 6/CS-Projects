@@ -38,8 +38,14 @@ Identifier$int0
 Assignment
 Integer$47
 Operator$+
-Integer$48
+Identifier$flt0
+Operator$*
+Integer$50
+Operator$/
+Open(
+Integer$20
 Operator$+
 Integer$40
+Close)
 Semicolon
 Close}
