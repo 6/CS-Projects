@@ -110,27 +110,32 @@ class Parser
   assignment: () ->
     identifier = this.match(new Token "Identifier")
     this.match(new Token "Assignment")
-    this.error(new Token "Literal") unless this.anyOf Tokens.Literals
-    val = @lexer.currToken
-    @lexer.nextToken()
+    expression = this.expression()
     this.match(new Token "Semicolon")
-    new abstract.Assignment identifier, val
+    new abstract.Assignment identifier, expression
 
+  expression: () ->
+    expr = null
+    if this.anyOf(Tokens.Literals)
+      expr = new abstract.Value @lexer.currToken
+    else if this.anyOf(Tokens.Unary) or this.anyOf(Tokens.Binary)
+      expr = "TODO"
+    else #variableRef
+      expr = "TODO"
+    @lexer.nextToken()
+    expr
 
 # Constants
 Tokens =
   Keywords: [new Token("Keyword", "int"), new Token("Keyword", "float")]
+  Unary: [new Token("Operator", "-")]
   OpsAdd: [new Token("Operator", "+"), new Token("Operator", "-")]
   OpsMultiply: [new Token("Operator", "*"), new Token("Operator", "/")]
   OpsEquality: [new Token("Comparison", "==")]
   Literals: [new Token("Float"), new Token("Integer")]
   END: "END"
 
-Tokens2 =
-  OpsArithmetic: Tokens.OpsAdd.concat Tokens.OpsMultiply 
-
-# Merge newer constants with the origin Tokens hash
-Tokens[key] ?= val for key,val of Tokens2
+Tokens.Binary = Tokens.OpsAdd.concat(Tokens.OpsMultiply).concat Tokens.OpsEquality
 
 # Read a file asynchronously and pass the contents to the callback function
 readFileAsync = (filename, callback, callbackArgs...) ->

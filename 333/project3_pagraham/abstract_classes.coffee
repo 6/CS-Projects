@@ -21,19 +21,22 @@ class exports.Declaration
 class exports.Type
   constructor: (@keyword) ->
   
-  printTree: (indent) ->
-    p "#{indent}|-Type: #{@keyword.value}"
+  printTree: (indent) -> p "#{indent}|-Type: #{@keyword.value}"
 
 class exports.Variable
   constructor: (@identifier) ->
   
-  printTree: (indent) ->
-    p "#{indent}|-#{@identifier.toS()}"
+  printTree: (indent) -> p "#{indent}|-#{@identifier.toS()}"
 
 class exports.Assignment
-  constructor: (@identifier, @value) ->
+  constructor: (@identifier, @expression) ->
   
   printTree: (indent) ->
     p "#{indent}|-Assignment"
     p "#{indent}|  |-Variable: #{@identifier.toS()}"
-    #TODO
+    @expression.printTree("#{indent}|  ")     
+
+class exports.Value
+  constructor: (@value) ->
+  
+  printTree: (indent) -> p "#{indent}|-Value: #{@value.value}"
