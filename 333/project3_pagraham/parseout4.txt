@@ -30,4 +30,12 @@ Identifier$int0
 Assignment
 Integer$46
 Semicolon
+Keyword$if
+Open(
+Identifier$int0
+Close)
+Identifier$int0
+Assignment
+Integer$47
+Semicolon
 Close}
