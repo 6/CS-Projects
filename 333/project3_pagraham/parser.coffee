@@ -121,8 +121,7 @@ class exports.Parser
     add = this.addition()
     if this.anyOf(Tokens.OpsEquality)
       eqOp = new abstract.Operator this.match(new Token "Operator")
-      add2 = this.addition()
-      return new abstract.Binary add, eqOp, add2
+      return new abstract.Binary add, eqOp, this.addition()
     else
       return add
 
@@ -132,8 +131,7 @@ class exports.Parser
     # Optional multiplication or division
     while this.anyOf(Tokens.OpsMultiply)
       mulOp = new abstract.Operator this.match(new Token "Operator")
-      fct2 = this.factor()
-      fct = new abstract.Binary fct, mulOp, fct2
+      fct = new abstract.Binary fct, mulOp, this.factor()
     fct
   
   # Factor -> [UnaryOp] Factor
