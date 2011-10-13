@@ -88,14 +88,12 @@ class Parser
   
   declarations: () ->
     decs = []
-    decs = decs.concat this.declaration() while this.anyOf(Tokens.Keywords)
+    while this.anyOf(Tokens.Keywords)
+      tokenType = new abstract.Type this.match(new Token "Keyword")
+      identifier = new abstract.Variable this.match(new Token "Identifier")
+      this.match(new Token "Semicolon")
+      decs = decs.concat(new abstract.Declaration tokenType, identifier)
     decs
-
-  declaration: () ->
-    tokenType = new abstract.Type this.match(new Token "Keyword")
-    identifier = new abstract.Variable this.match(new Token "Identifier")
-    this.match(new Token "Semicolon")
-    new abstract.Declaration tokenType, identifier
   
   statements: () ->
     stmts = []
@@ -105,13 +103,10 @@ class Parser
         numOpenBrackets += 1
       else if @lexer.currToken.isEqual(new Token "Close}")
         numOpenBrackets -= 1
-      else stmts = stmts.concat this.statement()
+      else if @lexer.currToken.isEqual(new Token "Keyword", "if")
+        stmts = stmts.concat this.ifStatement()
+      else stmts = stmts.concat this.assignment()
     stmts
-  
-  statement: () ->
-    if @lexer.currToken.isEqual(new Token "Keyword", "if")
-      return this.ifStatement()
-    else this.assignment()
   
   ifStatement: () ->
     "TODO"
