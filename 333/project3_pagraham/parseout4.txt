@@ -37,5 +37,7 @@ Close)
 Identifier$int0
 Assignment
 Integer$47
+Operator$+
+Integer$48
 Semicolon
 Close}
