@@ -109,11 +109,12 @@ class exports.Parser
     new abstract.Term fct, mulOp, fct2
     
   factor: () ->
+    prm = this.primary()
     # optional unary operator
     if this.anyOf(Tokens.Unary)
       unary = this.match(new Token "Operator")
-    primary = this.primary()
-    new abstract.Factor primary, unary
+      prm = new abstract.Unary unary, prm
+    prm
     
   addition: () ->
     trm = this.term()

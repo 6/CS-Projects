@@ -88,10 +88,3 @@ class exports.Term
       @factor2.printTree("#{indent}|  ")
     else
       @factor.printTree(indent)
-  
-class exports.Factor
-  constructor: (@primary, @unary) ->
-  
-  printTree: (indent) ->
-    @unary.printTree(indent) if @unary?
-    @primary.printTree("#{indent}|  ")
