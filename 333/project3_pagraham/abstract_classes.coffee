@@ -1,3 +1,6 @@
+###
+Collection of abstract syntax classes for Clite, each of which has a printTree method that takes a parameter representing the current indentation level.
+###
 p = console.log
 
 class exports.Program
@@ -40,3 +43,14 @@ class exports.Value
   constructor: (@value) ->
   
   printTree: (indent) -> p "#{indent}|-Value: #{@value.value}"
+  
+class exports.IfStatement
+  constructor: (@expression, @stmtIf, @stmtElse) ->
+  
+  printTree: (indent) ->
+    p "#{indent}|-If"
+    @expression.printTree("#{indent}|  ")
+    @stmtIf.printTree("#{indent}|  |  ")
+    if @stmtElse?
+      p "#{indent}|-Else"
+      @stmtElse.printTree("#{indent}|  ")

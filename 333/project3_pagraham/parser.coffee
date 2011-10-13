@@ -65,13 +65,28 @@ class exports.Parser
         numOpenBrackets += 1
       else if @lexer.currToken.isEqual(new Token "Close}")
         numOpenBrackets -= 1
-      else if @lexer.currToken.isEqual(new Token "Keyword", "if")
-        stmts = stmts.concat this.ifStatement()
-      else stmts = stmts.concat this.assignment()
+      else
+        stmts = stmts.concat this.statement()
     stmts
   
+  statement: () ->
+    if this.anyOf([new Token "Keyword", "if"])
+      return this.ifStatement()
+    else
+      return this.assignment()
+  
   ifStatement: () ->
-    "TODO"
+    this.match(new Token "Keyword", "if")
+    this.match(new Token "Open(")
+    expr = this.expression()
+    this.match(new Token "Close)")
+    stmtIf = this.statement()
+    # optional else conditional with statement
+    stmtElse = null
+    if this.anyOf([new Token "Keyword", "else"])
+      @lexer.nextToken()
+      stmtElse = this.statement()
+    new abstract.IfStatement expr, stmtIf, stmtElse
 
   assignment: () ->
     identifier = this.match(new Token "Identifier")
