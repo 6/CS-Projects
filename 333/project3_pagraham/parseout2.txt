@@ -8,5 +8,9 @@ Identifier$int0
 Semicolon
 Keyword$float
 Identifier$flt0
+Comma
+Identifier$flt1
+Comma
+Identifier$flt2
 Semicolon
 Close}

@@ -51,10 +51,19 @@ class exports.Parser
   declarations: () ->
     decs = []
     while this.anyOf(Tokens.Keywords)
-      tokenType = new abstract.Type this.match(new Token "Keyword")
+      decs = decs.concat(this.declaration())
+    decs
+    
+  declaration: () ->
+    decs = []
+    tokenType = new abstract.Type this.match(new Token "Keyword")
+    identifier = new abstract.Variable this.match(new Token "Identifier")
+    decs = decs.concat new abstract.Declaration(tokenType, identifier)
+    while this.anyOf([new Token "Comma"])
+      this.match(new Token "Comma")
       identifier = new abstract.Variable this.match(new Token "Identifier")
-      this.match(new Token "Semicolon")
-      decs = decs.concat(new abstract.Declaration tokenType, identifier)
+      decs = decs.concat new abstract.Declaration(tokenType, identifier)
+    this.match(new Token "Semicolon")
     decs
   
   statements: () ->
@@ -95,10 +104,13 @@ class exports.Parser
     new abstract.Assignment identifier, expression
 
   expression: () ->
-    #trm = this.term()
-    @lexer.nextToken()
-    return new abstract.Value "WHAT"
-    
+    numOpenParens = 0
+    while not this.anyOf([new Token("Semicolon"), new Token("Close")]) or numOpenParens > 0
+      if this.anyOf(new Token "Open(")
+        numOpenParens += 1
+      else if this.anyOf(new Token "Close)")
+        numOpenParens -= 1
+
   term: () ->
     fct = this.factor()
     # Optional multiplication or division
@@ -106,11 +118,11 @@ class exports.Parser
       mulOp = this.match(new Token "Operator")
       fct2 = this.factor()
       fct = new abstract.Binary fct, mulOp, fct2
-    new abstract.Term fct, mulOp, fct2
+    fct
     
   factor: () ->
     prm = this.primary()
-    # optional unary operator
+    # Optional unary operator
     if this.anyOf(Tokens.Unary)
       unary = this.match(new Token "Operator")
       prm = new abstract.Unary unary, prm
@@ -126,10 +138,10 @@ class exports.Parser
     
   primary: () ->
     if this.anyOf(Tokens.Literals)
-      prim = new abstract.Value @lexer.currToken
+      prim = new abstract.Value @lexer.currToken.value
       @lexer.nextToken()
     else if this.anyOf([new Token "Identifier"])
-      prim = new abstract.Identifier this.match(new Token "Identifier")
+      prim = new abstract.Variable this.match(new Token "Identifier")
     else
       this.match(new Token "Open(")
       prim = this.expression()

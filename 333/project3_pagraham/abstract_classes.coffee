@@ -83,7 +83,7 @@ class exports.Term
     
   printTree: (indent) ->
     if @mulOp?
-      p "#{indent}|-Operator: #{@mulOp}"
+      @mulOp.printTree(indent)
       @factor.printTree("#{indent}|  ")
       @factor2.printTree("#{indent}|  ")
     else
