@@ -24,6 +24,7 @@ class Lexer
   ###
   constructor: (@tokenStrings, @delimiter) ->
     @currToken
+    @lineCount = @tokenStrings.length
 
   ###
   Reads the next token string, splits based on the delimiter character and
@@ -56,6 +57,7 @@ class Parser
   expected one token but saw the Lexer's current token instead
   ###
   error: (token) ->
+    p "Line #{@lexer.lineCount - @lexer.tokenStrings.length}"
     p "Expected #{token.toS()}, found #{@lexer.currToken.toS()}. Exiting."
     process.exit 1
   
