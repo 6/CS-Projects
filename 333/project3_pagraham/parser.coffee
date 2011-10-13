@@ -104,15 +104,13 @@ class exports.Parser
     new abstract.Assignment identifier, expr
 
   expression: () ->
-    #while this.anyOf(Tokens.Literals) or this.anyOf([new Token "Identifier"]) or this.anyOf(Tokens.Binary) or this.anyOf(Tokens.Unary)
-    this.addition()
-      
-  equality: () ->
     add = this.addition()
     if this.anyOf(Tokens.OpsEquality)
-      eq = new abstract.Operator this.match(new Token "Operator")
+      eqOp = new abstract.Operator this.match(new Token "Operator")
       add2 = this.addition()
-    new abstract.Equality add, eq, add2
+      return new abstract.Binary add, eqOp, add2
+    else
+      return add
 
   term: () ->
     fct = this.factor()

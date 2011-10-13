@@ -77,15 +77,6 @@ class exports.Unary
     @op.printTree("#{indent}|  ")
     @term.printTree("#{indent}|  ")
     
-class exports.Equality
-  constructor: (@rel, @eqOp, @rel2) ->
-  
-  printTree: (indent) ->
-    p "#{indent}|-Equality"
-    @eqOp.printTree("#{indent}|  ")
-    @rel.printTree("#{indent}|  |  ")
-    @rel2.printTree("#{indent}|  |  ")
-    
 class exports.Term
   constructor: (@factor, @mulOp, @factor2) ->
     
