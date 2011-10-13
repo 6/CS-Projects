@@ -13,7 +13,7 @@ class exports.Parser
   ###
   match: (token) ->
     if token.isEqual @lexer.currToken
-      toReturn = @lexer.currToken
+      toReturn = @lexer.currToken.value
       @lexer.nextToken()
       return toReturn
     this.error token
@@ -61,9 +61,9 @@ class exports.Parser
     stmts = []
     numOpenBrackets = 1
     while numOpenBrackets >= 1
-      if @lexer.currToken.isEqual(new Token "Open{")
+      if this.anyOf([new Token "Open{"])
         numOpenBrackets += 1
-      else if @lexer.currToken.isEqual(new Token "Close}")
+      else if this.anyOf([new Token "Close}"])
         numOpenBrackets -= 1
       else
         stmts = stmts.concat this.statement()
@@ -82,7 +82,6 @@ class exports.Parser
     this.match(new Token "Close)")
     stmtIf = this.statement()
     # optional else conditional with statement
-    stmtElse = null
     if this.anyOf([new Token "Keyword", "else"])
       @lexer.nextToken()
       stmtElse = this.statement()
@@ -96,14 +95,42 @@ class exports.Parser
     new abstract.Assignment identifier, expression
 
   expression: () ->
-    expr = null
+    #trm = this.term()
+    @lexer.nextToken()
+    return new abstract.Value "WHAT"
+    
+  term: () ->
+    fct = this.factor()
+    # Optional multiplication or division
+    while this.anyOf(Tokens.OpsMultiply)
+      mulOp = this.match(new Token "Operator")
+      fct2 = this.factor()
+      fct = new abstract.Binary fct, mulOp, fct2
+    new abstract.Term fct, mulOp, fct2
+    
+  factor: () ->
+    # optional unary operator
+    if this.anyOf(Tokens.Unary)
+      unary = this.match(new Token "Operator")
+    primary = this.primary()
+    new abstract.Factor primary, unary
+    
+  addition: () ->
+    trm = this.term()
+    while this.anyOf(Tokens.OpsAdd)
+      addOp = this.match(new Token "Operator")
+      trm2 = this.term()
+      trm = new abstract.Binary trm, addOp, trm2
+    trm
+    
+  primary: () ->
     if this.anyOf(Tokens.Literals)
-      expr = new abstract.Value @lexer.currToken
+      prim = new abstract.Value @lexer.currToken
       @lexer.nextToken()
-    else if this.anyOf(Tokens.Unary) or this.anyOf(Tokens.Binary)
-      expr = "TODO"
-      @lexer.nextToken()
+    else if this.anyOf([new Token "Identifier"])
+      prim = new abstract.Identifier this.match(new Token "Identifier")
     else
-      # Expression is a VariableRef
-      expr = new abstract.Variable this.match(new Token "Identifier")
-    expr
+      this.match(new Token "Open(")
+      prim = this.expression()
+      this.match(new Token "Close)")
+    prim
