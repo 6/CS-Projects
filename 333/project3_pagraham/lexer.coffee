@@ -1,3 +1,4 @@
+p = console.log
 Token = require('./token').Token
 Tokens = require('./constants').Tokens
 
