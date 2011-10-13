@@ -36,6 +36,10 @@ class exports.Parser
       return true if token.isEqual @lexer.currToken
     false
     
+  ###
+  The following are parse methods for various parts of the Clite grammar.
+  ###
+  # Program -> int main (){ Declarations Statements }
   program: () ->
     this.match(new Token "Keyword", "int")
     this.match(new Token "Identifier", "main")
@@ -48,17 +52,20 @@ class exports.Parser
     this.match(new Token Tokens.END)
     new abstract.Program decpart, body
   
+  # Declarations -> {Declaration}
   declarations: () ->
     decs = []
     while this.anyOf(Tokens.Keywords)
       decs = decs.concat(this.declaration())
     decs
-    
+  
+  # Declaration -> Type Identifier {, Identifier};
   declaration: () ->
     decs = []
     tokenType = new abstract.Type this.match(new Token "Keyword")
     identifier = new abstract.Variable this.match(new Token "Identifier")
     decs = decs.concat new abstract.Declaration(tokenType, identifier)
+    # Check for multiple assignment
     while this.anyOf([new Token "Comma"])
       this.match(new Token "Comma")
       identifier = new abstract.Variable this.match(new Token "Identifier")
@@ -66,8 +73,11 @@ class exports.Parser
     this.match(new Token "Semicolon")
     decs
   
+  # Statements -> {Statement}
   statements: () ->
     stmts = []
+    # Keep track of the number of open brackets, so know when to stop parsing
+    # statements.
     numOpenBrackets = 1
     while numOpenBrackets >= 1
       if this.anyOf([new Token "Open{"])
@@ -78,24 +88,27 @@ class exports.Parser
         stmts = stmts.concat this.statement()
     stmts
   
+  # Statement -> Assignment | IfStatement
   statement: () ->
     if this.anyOf([new Token "Keyword", "if"])
       return this.ifStatement()
     else
       return this.assignment()
   
+  # IfStatement -> if (Expression) Statement [else Statement]
   ifStatement: () ->
     this.match(new Token "Keyword", "if")
     this.match(new Token "Open(")
     expr = this.expression()
     this.match(new Token "Close)")
     stmtIf = this.statement()
-    # optional else conditional with statement
+    # Optional else conditional with statement
     if this.anyOf([new Token "Keyword", "else"])
       @lexer.nextToken()
       stmtElse = this.statement()
     new abstract.IfStatement expr, stmtIf, stmtElse
 
+  # Assignment -> Identifier = Expression;
   assignment: () ->
     identifier = this.match(new Token "Identifier")
     this.match(new Token "Assignment")
@@ -103,6 +116,7 @@ class exports.Parser
     this.match(new Token "Semicolon")
     new abstract.Assignment identifier, expr
 
+  # Expression -> Addition [EqOp Addition]
   expression: () ->
     add = this.addition()
     if this.anyOf(Tokens.OpsEquality)
@@ -112,6 +126,7 @@ class exports.Parser
     else
       return add
 
+  # Term -> Factor {MulOp Factor}
   term: () ->
     fct = this.factor()
     # Optional multiplication or division
@@ -120,7 +135,8 @@ class exports.Parser
       fct2 = this.factor()
       fct = new abstract.Binary fct, mulOp, fct2
     fct
-    
+  
+  # Factor -> [UnaryOp] Factor
   factor: () ->
     prm = this.primary()
     # Optional unary operator
@@ -128,7 +144,8 @@ class exports.Parser
       unary = new abstract.Operator this.match(new Token "Operator")
       prm = new abstract.Unary unary, prm
     prm
-    
+  
+  # Addition -> Term {AddOp Term}
   addition: () ->
     trm = this.term()
     while this.anyOf(Tokens.OpsAdd)
@@ -136,7 +153,8 @@ class exports.Parser
       trm2 = this.term()
       trm = new abstract.Binary trm, addOp, trm2
     trm
-    
+  
+  # Primary -> Identifier | Literal | (Expression)
   primary: () ->
     if this.anyOf(Tokens.Literals)
       prim = new abstract.Value @lexer.currToken.value
