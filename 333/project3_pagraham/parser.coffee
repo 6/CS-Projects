@@ -150,8 +150,7 @@ class exports.Parser
     trm = this.term()
     while this.anyOf(Tokens.OpsAdd)
       addOp = new abstract.Operator this.match(new Token "Operator")
-      trm2 = this.term()
-      trm = new abstract.Binary trm, addOp, trm2
+      trm = new abstract.Binary trm, addOp, this.term()
     trm
   
   # Primary -> Identifier | Literal | (Expression)
