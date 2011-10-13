@@ -70,10 +70,6 @@ class Parser
       return true if token.tokenType == @lexer.currToken.tokenType
     false
     
-  parse: () ->
-    @lexer.nextToken() # advance to the first token
-    this.program().printTree("")
-    
   program: () ->
     this.match(new Token "Keyword", "int")
     this.match(new Token "Identifier", "main")
@@ -149,7 +145,8 @@ readFileAsync = (filename, callback, callbackArgs...) ->
 printTree = (tokenStrings, delimiter) ->
   lexer = new Lexer tokenStrings, delimiter
   parser = new Parser lexer
-  parser.parse()
+  parser.lexer.nextToken() # advance to the first token
+  parser.program().printTree("")
 
 # Main method expects a filename to be passed in through command line
 exports.main = (argv) ->
