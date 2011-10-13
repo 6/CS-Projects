@@ -58,25 +58,33 @@ class exports.IfStatement
 class exports.Operator
   constructor: (@op) ->
   
-  printTree: (indent) ->
-    p "#{indent}|-Operator: #{@op}"
+  printTree: (indent) -> p "#{indent}|-Operator: #{@op}"
 
 class exports.Binary
-  constructor: (@op, @term1, @term2) ->
+  constructor: (@term1, @op, @term2) ->
   
   printTree: (indent) ->
     p "#{indent}|-Binary"
     @op.printTree("#{indent}|  ")
-    @term1.printTree("#{indent}|  ")
-    @term2.printTree("#{indent}|  ")
+    @term1.printTree("#{indent}|  |  ")
+    @term2.printTree("#{indent}|  |  ")
 
 class exports.Unary
   constructor: (@op, @term) ->
 
   printTree: (indent) ->
     p "#{indent}|-Unary"
-    @op.printTree(indent)
-    @term.printTree(indent)
+    @op.printTree("#{indent}|  ")
+    @term.printTree("#{indent}|  ")
+    
+class exports.Equality
+  constructor: (@rel, @eqOp, @rel2) ->
+  
+  printTree: (indent) ->
+    p "#{indent}|-Equality"
+    @eqOp.printTree("#{indent}|  ")
+    @rel.printTree("#{indent}|  |  ")
+    @rel2.printTree("#{indent}|  |  ")
     
 class exports.Term
   constructor: (@factor, @mulOp, @factor2) ->
