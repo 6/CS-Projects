@@ -136,12 +136,12 @@ class exports.Parser
   
   # Factor -> [UnaryOp] Factor
   factor: () ->
-    prm = this.primary()
     # Optional unary operator
     if this.anyOf(Tokens.Unary)
       unary = new abstract.Operator this.match(new Token "Operator")
-      prm = new abstract.Unary unary, prm
-    prm
+      return new abstract.Unary unary, this.primary()
+    else
+      return this.primary()
   
   # Addition -> Term {AddOp Term}
   addition: () ->
