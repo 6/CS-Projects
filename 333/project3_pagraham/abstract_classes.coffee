@@ -55,6 +55,15 @@ class exports.IfStatement
     if @stmtElse?
       p "#{indent}|-Else"
       @stmtElse.printTree("#{indent}|  ")
+      
+class exports.WhileStatement
+  constructor: (@expression, @stmt) ->
+    
+  printTree: (indent) ->
+    p "#{indent}|-While"
+    @expression.printTree("#{indent}|  ")
+    p "#{indent}|-Do"
+    @stmt.printTree("#{indent}|  ")
 
 class exports.Operator
   constructor: (@op) ->

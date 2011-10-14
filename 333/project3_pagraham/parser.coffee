@@ -55,7 +55,7 @@ class exports.Parser
   # Declarations -> {Declaration}
   declarations: () ->
     decs = []
-    while this.anyOf(Tokens.Keywords)
+    while this.anyOf(Tokens.Types)
       decs = decs.concat(this.declaration())
     decs
   
@@ -92,6 +92,8 @@ class exports.Parser
   statement: () ->
     if this.anyOf([new Token "Keyword", "if"])
       return this.ifStatement()
+    else if this.anyOf([new Token "Keyword", "while"])
+      return this.whileStatement()
     else
       return this.assignment()
   
@@ -107,6 +109,15 @@ class exports.Parser
       @lexer.nextToken()
       stmtElse = this.statement()
     new abstract.IfStatement expr, stmtIf, stmtElse
+  
+  # WhileStatement -> while (Expression) Statement
+  whileStatement: () ->
+    this.match(new Token "Keyword", "while")
+    this.match(new Token "Open(")
+    expr = this.expression()
+    this.match(new Token "Close)")
+    stmt = this.statement()
+    new abstract.WhileStatement expr, stmt
 
   # Assignment -> Identifier = Expression;
   assignment: () ->

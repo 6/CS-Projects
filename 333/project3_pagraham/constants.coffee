@@ -2,7 +2,7 @@ Token = require('./token').Token
 
 # Constants
 Tokens =
-  Keywords: [new Token("Keyword", "int"), new Token("Keyword", "float"), new Token("Keyword", "bool")]
+  Types: [new Token("Keyword", "int"), new Token("Keyword", "float"), new Token("Keyword", "bool")]
   Unary: [new Token("Operator", "-")]
   OpsAdd: [new Token("Operator", "+"), new Token("Operator", "-")]
   OpsMultiply: [new Token("Operator", "*"), new Token("Operator", "/"), new Token("Operator", "%")]
