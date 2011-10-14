@@ -50,7 +50,8 @@ class exports.IfStatement
   printTree: (indent) ->
     p "#{indent}|-If"
     @expression.printTree("#{indent}|  ")
-    @stmtIf.printTree("#{indent}|  |  ")
+    p "#{indent}|-Then"
+    @stmtIf.printTree("#{indent}|  ")
     if @stmtElse?
       p "#{indent}|-Else"
       @stmtElse.printTree("#{indent}|  ")

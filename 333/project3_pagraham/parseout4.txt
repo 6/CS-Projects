@@ -20,6 +20,8 @@ Semicolon
 Keyword$if
 Open(
 Integer$44
+Operator$==
+Identifier$flt0
 Close)
 Identifier$int0
 Assignment
