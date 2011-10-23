@@ -108,7 +108,6 @@ public partial class MainWindow
 		this.WindowPosition = ((global::Gtk.WindowPosition)(4));
 		// Container child MainWindow.Gtk.Container+ContainerChild
 		this.vbox1 = new global::Gtk.VBox ();
-		this.vbox1.Name = "vbox1";
 		this.vbox1.Spacing = 6;
 		// Container child vbox1.Gtk.Box+BoxChild
 		this.UIManager.AddUiFromString ("<ui><menubar name='menubar1'><menu name='JaxBoxAction' action='JaxBoxAction'><menuitem name='AboutJaxBoxAction' action='AboutJaxBoxAction'/><menuitem name='QuitAction' action='QuitAction'/></menu><menu name='FileAction' action='FileAction'><menu name='NewAction' action='NewAction'><menuitem name='BoxAction1' action='BoxAction1'/><menuitem name='OrganizerAction' action='OrganizerAction'/></menu><menuitem name='OpenAction' action='OpenAction'/><menuitem name='SaveAction' action='SaveAction'/><menuitem name='SaveAsAction' action='SaveAsAction'/><menuitem name='CloseAction' action='CloseAction'/></menu><menu name='EditAction' action='EditAction'><menuitem name='UndoAction' action='UndoAction'/><menuitem name='RedoAction' action='RedoAction'/><menuitem name='CutAction' action='CutAction'/><menuitem name='CopyAction' action='CopyAction'/><menuitem name='PasteAction' action='PasteAction'/><menuitem name='DeleteAction' action='DeleteAction'/></menu><menu name='ViewAction' action='ViewAction'/><menu name='HelpAction' action='HelpAction'><menuitem name='DocumentationOnlineAction' action='DocumentationOnlineAction'/><menuitem name='SendFeedbackAction' action='SendFeedbackAction'/></menu></menubar></ui>");
