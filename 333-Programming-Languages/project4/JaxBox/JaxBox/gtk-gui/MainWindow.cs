@@ -127,8 +127,10 @@ public partial class MainWindow
 		this.DefaultHeight = 300;
 		this.Show ();
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
+		this.AboutJaxBoxAction.Activated += new global::System.EventHandler (this.OnAbout);
 		this.QuitAction.Activated += new global::System.EventHandler (this.OnQuitActionActivated);
 		this.OpenAction.Activated += new global::System.EventHandler (this.OnOpenActionActivated);
 		this.SaveAction.Activated += new global::System.EventHandler (this.OnSaveActionActivated);
+		this.PasteAction.Activated += new global::System.EventHandler (this.OnPasteActionActivated);
 	}
 }

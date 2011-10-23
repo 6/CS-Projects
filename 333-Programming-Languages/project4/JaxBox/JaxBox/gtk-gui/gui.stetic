@@ -39,6 +39,7 @@
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">About JaxBox</property>
         <property name="ShortLabel" translatable="yes">About JaxBox</property>
+        <signal name="Activated" handler="OnAbout" />
       </action>
       <action id="QuitAction">
         <property name="Type">Action</property>
@@ -97,6 +98,7 @@
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">Paste</property>
         <property name="ShortLabel" translatable="yes">Paste</property>
+        <signal name="Activated" handler="OnPasteActionActivated" />
       </action>
       <action id="DeleteAction">
         <property name="Type">Action</property>
