@@ -44,6 +44,7 @@
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">Quit</property>
         <property name="ShortLabel" translatable="yes">Quit</property>
+        <signal name="Activated" handler="OnQuitActionActivated" />
       </action>
       <action id="NewAction">
         <property name="Type">Action</property>
@@ -110,6 +111,16 @@
         <property name="Label" translatable="yes">Send Feedback</property>
         <property name="ShortLabel" translatable="yes">Send Feedback</property>
       </action>
+      <action id="BoxAction1">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Box</property>
+        <property name="ShortLabel" translatable="yes">Box</property>
+      </action>
+      <action id="OrganizerAction">
+        <property name="Type">Action</property>
+        <property name="Label" translatable="yes">Organizer</property>
+        <property name="ShortLabel" translatable="yes">Organizer</property>
+      </action>
     </action-group>
     <property name="MemberName" />
     <property name="Title" translatable="yes">MainWindow</property>
@@ -128,7 +139,10 @@
                 <node type="Menuitem" action="QuitAction" />
               </node>
               <node type="Menu" action="FileAction">
-                <node type="Menuitem" action="NewAction" />
+                <node type="Menu" action="NewAction">
+                  <node type="Menuitem" action="BoxAction1" />
+                  <node type="Menuitem" action="OrganizerAction" />
+                </node>
                 <node type="Menuitem" action="OpenAction" />
                 <node type="Menuitem" action="SaveAction" />
                 <node type="Menuitem" action="SaveAsAction" />

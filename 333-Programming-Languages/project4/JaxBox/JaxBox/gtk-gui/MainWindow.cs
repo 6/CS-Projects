@@ -119,5 +119,6 @@ public partial class MainWindow
 		this.DefaultHeight = 300;
 		this.Show ();
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
+		this.QuitAction.Activated += new global::System.EventHandler (this.OnQuitActionActivated);
 	}
 }
