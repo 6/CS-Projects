@@ -55,11 +55,13 @@
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">Open</property>
         <property name="ShortLabel" translatable="yes">Open</property>
+        <signal name="Activated" handler="OnOpenActionActivated" />
       </action>
       <action id="SaveAction">
         <property name="Type">Action</property>
         <property name="Label" translatable="yes">Save</property>
         <property name="ShortLabel" translatable="yes">Save</property>
+        <signal name="Activated" handler="OnSaveActionActivated" />
       </action>
       <action id="SaveAsAction">
         <property name="Type">Action</property>

@@ -24,6 +24,8 @@ public partial class MainWindow
 	private global::Gtk.Action DeleteAction;
 	private global::Gtk.Action DocumentationOnlineAction;
 	private global::Gtk.Action SendFeedbackAction;
+	private global::Gtk.Action BoxAction1;
+	private global::Gtk.Action OrganizerAction;
 	private global::Gtk.VBox vbox1;
 	private global::Gtk.MenuBar menubar1;
 	
@@ -93,6 +95,12 @@ public partial class MainWindow
 		this.SendFeedbackAction = new global::Gtk.Action ("SendFeedbackAction", global::Mono.Unix.Catalog.GetString ("Send Feedback"), null, null);
 		this.SendFeedbackAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Send Feedback");
 		w1.Add (this.SendFeedbackAction, null);
+		this.BoxAction1 = new global::Gtk.Action ("BoxAction1", global::Mono.Unix.Catalog.GetString ("Box"), null, null);
+		this.BoxAction1.ShortLabel = global::Mono.Unix.Catalog.GetString ("Box");
+		w1.Add (this.BoxAction1, null);
+		this.OrganizerAction = new global::Gtk.Action ("OrganizerAction", global::Mono.Unix.Catalog.GetString ("Organizer"), null, null);
+		this.OrganizerAction.ShortLabel = global::Mono.Unix.Catalog.GetString ("Organizer");
+		w1.Add (this.OrganizerAction, null);
 		this.UIManager.InsertActionGroup (w1, 0);
 		this.AddAccelGroup (this.UIManager.AccelGroup);
 		this.Name = "MainWindow";
@@ -103,7 +111,7 @@ public partial class MainWindow
 		this.vbox1.Name = "vbox1";
 		this.vbox1.Spacing = 6;
 		// Container child vbox1.Gtk.Box+BoxChild
-		this.UIManager.AddUiFromString ("<ui><menubar name='menubar1'><menu name='JaxBoxAction' action='JaxBoxAction'><menuitem name='AboutJaxBoxAction' action='AboutJaxBoxAction'/><menuitem name='QuitAction' action='QuitAction'/></menu><menu name='FileAction' action='FileAction'><menuitem name='NewAction' action='NewAction'/><menuitem name='OpenAction' action='OpenAction'/><menuitem name='SaveAction' action='SaveAction'/><menuitem name='SaveAsAction' action='SaveAsAction'/><menuitem name='CloseAction' action='CloseAction'/></menu><menu name='EditAction' action='EditAction'><menuitem name='UndoAction' action='UndoAction'/><menuitem name='RedoAction' action='RedoAction'/><menuitem name='CutAction' action='CutAction'/><menuitem name='CopyAction' action='CopyAction'/><menuitem name='PasteAction' action='PasteAction'/><menuitem name='DeleteAction' action='DeleteAction'/></menu><menu name='ViewAction' action='ViewAction'/><menu name='HelpAction' action='HelpAction'><menuitem name='DocumentationOnlineAction' action='DocumentationOnlineAction'/><menuitem name='SendFeedbackAction' action='SendFeedbackAction'/></menu></menubar></ui>");
+		this.UIManager.AddUiFromString ("<ui><menubar name='menubar1'><menu name='JaxBoxAction' action='JaxBoxAction'><menuitem name='AboutJaxBoxAction' action='AboutJaxBoxAction'/><menuitem name='QuitAction' action='QuitAction'/></menu><menu name='FileAction' action='FileAction'><menu name='NewAction' action='NewAction'><menuitem name='BoxAction1' action='BoxAction1'/><menuitem name='OrganizerAction' action='OrganizerAction'/></menu><menuitem name='OpenAction' action='OpenAction'/><menuitem name='SaveAction' action='SaveAction'/><menuitem name='SaveAsAction' action='SaveAsAction'/><menuitem name='CloseAction' action='CloseAction'/></menu><menu name='EditAction' action='EditAction'><menuitem name='UndoAction' action='UndoAction'/><menuitem name='RedoAction' action='RedoAction'/><menuitem name='CutAction' action='CutAction'/><menuitem name='CopyAction' action='CopyAction'/><menuitem name='PasteAction' action='PasteAction'/><menuitem name='DeleteAction' action='DeleteAction'/></menu><menu name='ViewAction' action='ViewAction'/><menu name='HelpAction' action='HelpAction'><menuitem name='DocumentationOnlineAction' action='DocumentationOnlineAction'/><menuitem name='SendFeedbackAction' action='SendFeedbackAction'/></menu></menubar></ui>");
 		this.menubar1 = ((global::Gtk.MenuBar)(this.UIManager.GetWidget ("/menubar1")));
 		this.menubar1.Name = "menubar1";
 		this.vbox1.Add (this.menubar1);
@@ -120,5 +128,7 @@ public partial class MainWindow
 		this.Show ();
 		this.DeleteEvent += new global::Gtk.DeleteEventHandler (this.OnDeleteEvent);
 		this.QuitAction.Activated += new global::System.EventHandler (this.OnQuitActionActivated);
+		this.OpenAction.Activated += new global::System.EventHandler (this.OnOpenActionActivated);
+		this.SaveAction.Activated += new global::System.EventHandler (this.OnSaveActionActivated);
 	}
 }
