@@ -1,6 +1,9 @@
 """
 Authors: Sarah Harmon, Peter Graham
 Description: Project 4, Task 2
+
+Demonstrates the rules for identifier naming, variable declarations, and 
+identifier scoping. Focuses on special rules or capabilities of CoffeeScript.
 """
 
 # Identifiers start with letter, underscore, or dollar sign.

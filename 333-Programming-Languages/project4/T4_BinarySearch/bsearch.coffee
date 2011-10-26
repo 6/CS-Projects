@@ -1,10 +1,12 @@
 """
 Authors: Sarah Harmon, Peter Graham
 Description: Project 4, Task 4
+
+Executes a recursive binary search on an array of numbers.
+Algorithm based off pseudocode from:
+http://en.wikipedia.org/wiki/Binary_search_algorithm
 """
 
-# Recursive binary search algorithm based off pseudocode from:
-# http://en.wikipedia.org/wiki/Binary_search_algorithm
 bsearch = (list, value, low, high) ->
   return -1 if high < low
   mid = low + Math.floor (high - low) / 2
