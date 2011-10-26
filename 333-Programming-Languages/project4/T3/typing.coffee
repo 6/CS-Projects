@@ -74,6 +74,41 @@ grades =
     83: "B-"
     87: "B+"
     
-# TODO: classes    
+# CLASSES
+# Classes are compiled into a JavaScript object.
+class Shape
+  constructor: (@color) ->
+    @color ?= "blue"
 
-# TODO: operators
+# Classes can be extended
+class Circle extends Shape
+  constructor: (@color, @radius) ->
+    super @color
+
+# Initializing a class
+c = new Circle "red", 3.5
+
+# OPERATORS - How the standard suite of operators (+ -  / * %) manipulate types
+# Standard arithmetic on numbers works (for the most part) as expected
+a = 1.0 + 3 - 2 # yields 2
+a = 10 % 3 # yields 1
+a = 12 / 6.0 * 2 # yields 4
+a = 1 / 2 # yields 0.5, rather than floor the division like Python does
+
+# Booleans and null are converted to integers with arithmetic. 
+# true = 1, false = 0, and null = 0
+two = true + true
+zero = false + false
+zero = true * false
+negative_one = null - true
+
+# For strings, the + operator is used for concatenation
+abc = "a" + "b" + "c"
+
+# Numbers will be converted to strings when being concatenated with strings
+abc = "abc" + 123 + 456 # The following will yield the string "abc123456"
+abc = 123 + 456 + "abc" # The other way around will yield string "579abc"
+
+# Operators can be used with embedded JavaScript
+a = `5 + 2` * `10` # yields 25, not 70
+b = `"hello"`+`" world"` # yields "hello world"
