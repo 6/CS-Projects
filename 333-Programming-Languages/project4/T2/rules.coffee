@@ -1,3 +1,8 @@
+"""
+Authors: Sarah Harmon, Peter Graham
+Description: Project 4, Task 2
+"""
+
 # Identifiers start with letter, underscore, or dollar sign.
 # Subsequent characters can be letter, underscore, dollar sign, and digit.
 a = 0

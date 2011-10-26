@@ -1,3 +1,8 @@
+"""
+Authors: Sarah Harmon, Peter Graham
+Description: Project 4, Task 4
+"""
+
 # Recursive binary search algorithm based off pseudocode from:
 # http://en.wikipedia.org/wiki/Binary_search_algorithm
 bsearch = (list, value, low, high) ->
