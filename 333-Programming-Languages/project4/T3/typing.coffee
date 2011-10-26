@@ -75,7 +75,7 @@ grades =
     87: "B+"
     
 # CLASSES
-# Classes are compiled into a JavaScript object.
+# Classes are compiled into a JavaScript prototype
 class Shape
   constructor: (@color) ->
     @color ?= "blue"
