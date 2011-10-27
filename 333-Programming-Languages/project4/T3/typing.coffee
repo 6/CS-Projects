@@ -38,10 +38,6 @@ js = `function() {
   alert("This is JavaScript");
 }`
 
-# NULL TYPE
-a = undefined
-b = null
-
 # ARRAY TYPE
 # The following three assignments result in the same array values.
 onetosix = [1, 2, 3, 4, 5, 6]
