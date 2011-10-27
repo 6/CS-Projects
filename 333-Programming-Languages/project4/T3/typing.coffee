@@ -10,6 +10,8 @@ manipulate which types and what the resulting type of each operation is.
 # NUMERIC TYPE
 negative_one_thousand = -10e2
 pi = 3.14
+octal = 0123
+hex = 0x123
 
 # BOOLEAN TYPE
 all_true = yes and on and true
