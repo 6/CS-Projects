@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<!--
+Peter Graham & Sarah Harmon CS333
+-->
+<meta charset='utf-8'>
+<title></title>
+<link type='text/css' rel='stylesheet' href='lib/normalize.css'/>
+<link type='text/css' rel='stylesheet' href='lib/clear.css'/>
+<link rel='stylesheet/less' type='text/css' href='peter-lib/html-coffee.less'/>
+<script src='lib/jquery-1.6.4.min.js'></script>
+<script src='lib/jquery.taboverride-1.1.js'></script>
+<script src='lib/coffee-script.js'></script>
+<script src='lib/less-1.1.3.min.js'></script>
+<script src='lib/underscore-min.js'></script>
+<script src='lib/underscore.string.js'></script>
+<script src='lib/haml.js'></script>
+<script type='text/coffeescript' src='peter-lib/html-coffee.coffee'></script>
+
+<!-- HAML template -->
+<script id='coffee-html-template' type='text/haml-template'>
+%h1#title 
+.wrap.clearfix
+  .half-wrap
+    .half
+      %textarea#code
+      %button#run-code-button Run code &rarr;
+      %span.tip or press M-Enter
+  .half-wrap
+    #output.half
+      Code output goes here.<br>(Note: will not work locally Google Chrome)
+</script>
+
+<!-- page-specific code below -->
+<p id="code-to-insert" class="hidden">
+print_info = (data) ->
+  v = data.entry
+  p "Title: #{v.title.$t}"
+  p "Author: #{v.author[0].name.$t}"
+  p "Thumbnail: #{v.media$group.media$thumbnail[0].url}"
+  p "Duration: #{v.media$group.yt$duration.seconds} seconds"
+
+get_youtube_id = (url) ->
+  yt_id_regex = new RegExp "v=([_a-z0-9]+)", "gi"
+  match = yt_id_regex.exec url
+  if match then return match[1] else no
+
+main = (url) ->
+  yt_id = get_youtube_id url
+  if yt_id
+    $.getJSON "https://gdata.youtube.com/feeds/api/standardfeeds/us/on_the_web/v/#{yt_id}?v=2&alt=json", print_info
+  else
+    p "No video found for #{url}. Is that a valid public YouTube URL?"
+
+url = prompt "Enter a YouTube video URL:"
+main url
+</p>
+<script type='text/coffeescript'>
+set_title "CS333 - Project 4 Extension"
+</script>
+    
