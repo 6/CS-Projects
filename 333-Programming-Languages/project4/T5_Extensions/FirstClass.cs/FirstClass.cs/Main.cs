@@ -4,28 +4,20 @@ namespace FirstClass.cs
 {
 	
 	class MainClass
-	{
-		public string that = "ok";
-		
+	{	
 		public static void Main (string[] args)
 		{
-			//Method 1 of Function Declaration
-			Func<string,string> first = delegate(string s)
-            {
-                return "I'm number one!";
-            };
-			
-			string one = first("This param doesn't actually matter!");
-			Console.WriteLine(one);
-			
-			//Method 2 of Function Declaration
-			Func<string,string> second = s => "Luigi almost win!";
-			
-			string two = second("Neither does this one!");
-			Console.WriteLine(two);
-		
+			Console.WriteLine(useMethod(new Func<string, string, string>(makeFullName), "Mr.", "Bliss"));
+			Console.WriteLine("...has a very tall hat.");
 		}
 		
-		public void what() {}
+		static object useMethod(Delegate method, params object[] args){
+	    	return method.DynamicInvoke(args);
+		}
+		
+		static string makeFullName(string firstName, string lastName){
+		    return firstName + " " + lastName;
+		}
+		
 	}
 }
