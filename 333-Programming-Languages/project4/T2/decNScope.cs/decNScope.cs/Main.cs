@@ -9,6 +9,7 @@ namespace decNScope.cs
 {
 	class MainClass
 	{
+		public string sweet = "nice!";
 		public static void Main (string[] args)
 		{
 			/*** Identifier Naming ***/
@@ -62,12 +63,22 @@ namespace decNScope.cs
 		}
 		
 		// function that helps to demonstrate scoping in C#.
-		public static void getNum() {
+		public void getNum() {
 			int num = 6;
-			if (num == 3) {string response = "hooray!";}
+			if (num == 3) {string response = sweet;}
 			else {string response = "really?  I expected better of you.";}
 			
-			//if we tried to access message here, we would obtain an error.
+			//if we tried to access the variable response here, we would obtain an error.
+		}
+		
+		// This method fails because it is static and therefore cannot access the class variable "sweet".
+		public static void failAtRetrievingVar() {
+			Console.WriteLine(sweet);
 		}
 	}
+	
+	// this class cannot use the MainClass variable "sweet"
+	/*public class OK {
+		private string = sweet;
+	}*/
 }
