@@ -110,3 +110,10 @@ abc = 123 + 456 + "abc" # The other way around will yield string "579abc"
 # Operators can be used with embedded JavaScript
 a = `5 + 2` * `10` # yields 25, not 70
 b = `"hello"`+`" world"` # yields "hello world"
+
+# Using the + operator with arrays produces strange results
+# Note: all other standard operators produce NaN (not a number)
+a = [1,2] + [3,4] # produces the string: '1,23,4'
+
+# Using the + operator with objects also produces a strange result
+a = {1:2} + {3:4} # produces a string: '[object Object][object Object]'
