@@ -2,8 +2,11 @@ using System;
 
 namespace FirstClass.cs
 {
+	
 	class MainClass
 	{
+		public string that = "ok";
+		
 		public static void Main (string[] args)
 		{
 			//Method 1 of Function Declaration
@@ -20,6 +23,9 @@ namespace FirstClass.cs
 			
 			string two = second("Neither does this one!");
 			Console.WriteLine(two);
+		
 		}
+		
+		public void what() {}
 	}
 }

@@ -7,9 +7,23 @@ using System;
 
 namespace decNScope.cs
 {
+	class AnotherClass
+	{
+		public static string sweet2 = "nice2!";
+		
+		public void succeed() {
+			Console.WriteLine(sweet2);
+		}	
+		
+		// succeeds so long as sweet2 is static
+		public void fail() {
+			Console.WriteLine(sweet2);
+		}	
+	}	
+	
 	class MainClass
 	{
-		public string sweet = "nice!";
+		public static string sweet = "nice!";
 		public static void Main (string[] args)
 		{
 			/*** Identifier Naming ***/
@@ -63,7 +77,7 @@ namespace decNScope.cs
 		}
 		
 		// function that helps to demonstrate scoping in C#.
-		public void getNum() {
+		public static void getNum() {
 			int num = 6;
 			if (num == 3) {string response = sweet;}
 			else {string response = "really?  I expected better of you.";}
@@ -71,14 +85,14 @@ namespace decNScope.cs
 			//if we tried to access the variable response here, we would obtain an error.
 		}
 		
-		// This method fails because it is static and therefore cannot access the class variable "sweet".
-		public static void failAtRetrievingVar() {
-			Console.WriteLine(sweet);
-		}
 	}
 	
-	// this class cannot use the MainClass variable "sweet"
-	/*public class OK {
-		private string = sweet;
+	// this class can use the MainClass variable "sweet" if we instantiate a MainClass var
+	/*public class NewClass {
+		private void newClassMethod() {
+			MainClass mc = new MainClass();
+			string salty = mc.sweet;	
+		}
+		
 	}*/
 }
