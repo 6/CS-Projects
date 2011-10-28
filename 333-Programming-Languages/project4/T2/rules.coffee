@@ -23,8 +23,6 @@ a_func = () ->
   a = 1
   b = 2
   c = 3
-  
-# TODO: this keyword and how "=>" fat arrow fixes dynamic scoping issue
 
 # The compiled JavaScript is wrapped in an anonymous function, so all code in
 # this file will be wrapped with a (function(){ ... }).call(this);. Thus, to
