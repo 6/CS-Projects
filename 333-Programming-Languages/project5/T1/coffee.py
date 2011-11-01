@@ -5,8 +5,10 @@ Develop a semantic description of the Program function and the Initial State in
 CoffeeScript.
 """
 
-def MProgram(p):
-  pass
+def MProgram(program):
+  return MStatement(program.body, MInitialState())
 
-def MInitialState(decs):
-  pass
+def MInitialState():
+  # CoffeeScript does not have an explicit declarations section like CLite.
+  # Variables can be declared anywhere in the program.
+  return {}
