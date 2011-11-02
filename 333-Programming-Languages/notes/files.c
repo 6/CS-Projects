@@ -16,5 +16,6 @@ int main(int argc, char** argv)
 		fprintf(stdout, "%c", c);
 	}
 	
+	// definitely want to close if writing.
 	fclose(fp);
 }

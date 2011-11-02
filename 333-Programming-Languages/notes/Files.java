@@ -5,6 +5,11 @@ import java.io.IOException;
 
 /**
  * File I/O in Java.
+ * In Java, have buffers linked together in system.
+ * Forwarding requests between input/output buffers(?)
+ *
+ * - Much more verbose than C and Python versions.
+ * - Forces you to handle exceptions.
  */
 public class Files
 {
@@ -21,5 +26,7 @@ public class Files
 			System.out.println(line);
 			line = fp.readLine();
 		}
+		
+		fp.close();
 	}
 }
