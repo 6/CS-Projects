@@ -6,5 +6,5 @@ CoffeeScript.
 """
 def MAssignment(assign, state):
   # This function covers assignment of a variable, property, or index to a value
-  state[MAssignable(a.assignable)] = MExpression(a.expr, state)
+  state[MAssignable(assign.assignable)] = MExpression(assign.expr, state)
   return state
