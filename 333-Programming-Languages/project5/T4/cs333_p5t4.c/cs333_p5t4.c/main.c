@@ -15,7 +15,12 @@ To run: in terminal
 
 int main (int argc, char *argv[])
 {
-	/* In this example, we attempt to divide by zero */
+	/* 
+	In this example, we attempt to divide by zero 
+	As specified on the following page, a divide-by-zero operation is an undefined
+	behavior in the C (and C++) standard:
+	http://embed.cs.utah.edu/ioc/
+	*/
 	printf("Let's try it!");	//not printed	
 	int x = 0;
 	
