@@ -6,7 +6,11 @@ CoffeeScript.
 """
 
 def MProgram(program):
-  return MStatement(program.body, MInitialState())
+  # Program is called "Root" in the CoffeeScript grammar
+  if program.type == "body":
+    return MBody(program.body, MInitialState())
+  else:
+    return MBlock(program.block, MInitialState())
 
 def MInitialState():
   # CoffeeScript does not have an explicit declarations section like CLite.
