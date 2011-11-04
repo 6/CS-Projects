@@ -10,13 +10,10 @@ def MProgram(program):
   return MNamespaceMemberDeclaration(program.body, state)
 
 def MInitialState(opt_directives, opt_globals):
-  # Directives and globals are optional, but modify the initial state if present
+  # Directives and globals are optional and can modify initial state if present
   state = {}
   for dir in opt_directives:
-    if dir.type == "using-alias-directive":
-      state[dir.identifier] = MNamespaceOrTypeName(dir.namespace_or_type_name)
-    # otherwise, using-namespace-directive, so doesn't modify state
+    state = MUsingDirective(dir, state)
   for section in opt_globals:
-    for attr in section:
-      state[MAttributeTarget(attr.target)] = MAttributeList(attr.list)
+    state = MGlobalAttributeSection(section, state)
   return state
