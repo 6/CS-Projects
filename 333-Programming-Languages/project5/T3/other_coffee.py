@@ -10,7 +10,7 @@ def MWhile(loop, state):
   # 2. Postfix, with a single expression
   if loop.type == "normal":
     return MWhileNormal(loop.block, state)
-  else
+  else:
     return MWhilePostfix(loop.expr, state)
   
 def MIf(c, state):
@@ -23,6 +23,6 @@ def MIf(c, state):
     return MIfElseBlock(c.block, state)
   elif c.type == "statement" and MExpression(c.expr, state):
     return MStatement(c.statement, state)
-  elif c.type == "expression" and MExpression(c.expr, state)
+  elif c.type == "expression" and MExpression(c.expr, state):
     return MExpression(c.expr, state)
   return state
