@@ -1,0 +1,2 @@
+Tk app for visualizing and analyzing apache log data.
+Features a naive bayes classifier and decision tree learning.
