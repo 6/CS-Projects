@@ -40,13 +40,13 @@ class genFun:
                 
                 try:
                     allFiles = os.listdir(directory)
-                    
+               
                     # If need to check for extensions, compile regex
                     if ext:
-                        regex = re.compile("[^\s]+(\.(?i)("+\
+                        regex = re.compile("[^\n]+(\.(?i)("+\
                                            '|'.join(map(str,ext))+\
                                            "))$")
-                        
+
                     for file in allFiles:
                         
                         # If need to check for extensions, check for match
