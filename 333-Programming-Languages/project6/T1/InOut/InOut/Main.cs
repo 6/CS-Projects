@@ -37,6 +37,10 @@ namespace InOut
 			FileStream fs = new FileStream("test234", FileMode.OpenOrCreate, FileAccess.Write);
 			StreamWriter sw = new StreamWriter(fs);
 			sw.WriteLine("some\nother\ntext");
+			
+			FileStream bfs = new FileStream("testBinfile", FileMode.OpenOrCreate, FileAccess.Write);
+			BinaryWriter bw = new BinaryWriter(bfs);
+			bw.Write("some test text");
 		}
 		
 		public static void Main (string[] args)
