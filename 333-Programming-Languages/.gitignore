@@ -1,0 +1,7 @@
+bin
+*.userprefs
+*.pidb
+*.usertasks
+*.md.pc
+*.user
+*.suo
