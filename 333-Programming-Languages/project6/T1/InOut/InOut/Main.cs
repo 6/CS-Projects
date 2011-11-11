@@ -23,7 +23,7 @@ namespace InOut
 		 */
 		public static void file_io() {
 			// using File class
-			string[] lines = System.IO.File.ReadAllLines(@"/Users/pete/test.txt");
+			string[] lines = File.ReadAllLines(@"/Users/pete/test.txt");
 			Console.WriteLine ("Number of lines: "+lines.Length);
 			
 			File.WriteAllText("test123", "some\ntest\nhello");
