@@ -1,3 +1,8 @@
+"""
+Authors: Sarah Harmon, Peter Graham
+Description: Project 6, Task 2
+"""
+
 # CoffeeScript does exception/error handling through try-catch-finally blocks.
 # This is built into the language. Since CoffeeScript does not support file I/O,
 # a way to report an error may be to send an AJAX GET/POST request with basic

@@ -1,3 +1,8 @@
+"""
+Authors: Sarah Harmon, Peter Graham
+Description: Project 6, Task 3
+"""
+
 # Parenthesis are optional if no parameters
 funcA = -> console.log "Entered funcA"
 funcB = () -> console.log "Entered funcB"

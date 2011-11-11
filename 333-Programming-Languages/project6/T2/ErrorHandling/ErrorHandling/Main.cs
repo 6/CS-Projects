@@ -1,3 +1,7 @@
+/*
+ * Authors: Peter Graham, Sarah Harmon
+ * Description: Project 6, Task 2
+ */ 
 using System;
 
 namespace ErrorHandling

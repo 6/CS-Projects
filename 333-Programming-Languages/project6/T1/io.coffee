@@ -1,3 +1,8 @@
+"""
+Authors: Sarah Harmon, Peter Graham
+Description: Project 6, Task 1
+"""
+
 # Writing to the terminal is accomplished using builtin console.log method.
 console.log "Hello world!"
 

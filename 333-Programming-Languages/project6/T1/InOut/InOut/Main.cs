@@ -1,3 +1,7 @@
+/*
+ * Authors: Peter Graham, Sarah Harmon
+ * Description: Project 6, Task 1
+ */ 
 using System;
 using System.IO;
 
