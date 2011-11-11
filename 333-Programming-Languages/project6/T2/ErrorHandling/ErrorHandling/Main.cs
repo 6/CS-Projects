@@ -20,9 +20,18 @@ namespace ErrorHandling
 			
 		}
 		
+		/**
+		 * The following will throw an InvalidProgramException
+		 */
+		public static void throw_exception(){
+			InvalidProgramException e = new InvalidProgramException();
+			throw e;
+		}
+		
 		public static void Main (string[] args)
 		{
 			error_handling();
+			throw_exception();
 		}
 	}
 }
