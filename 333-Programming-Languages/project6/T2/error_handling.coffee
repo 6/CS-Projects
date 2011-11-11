@@ -15,3 +15,9 @@ Message: #{e.message}"
   console.log "\nSTACKTRACE:\n", e.stack
 finally
   console.log "FINALLY, DO THIS"
+  
+# Example of throwing an error:
+try
+  throw new Error
+catch e
+  console.log "Caught the error that was thrown manually"
