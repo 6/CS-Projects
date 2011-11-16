@@ -15,3 +15,4 @@
 ### Other courses
 * [Analysis of Algorithms](https://github.com/6/CS-Projects/tree/master/375-Analysis-of-Algorithms) (F2010)
 * [Programming Languages](https://github.com/6/CS-Projects/tree/master/333-Programming-Languages) (F2011)
+* [Networking & Security](https://github.com/6/node-im) (F2011)
