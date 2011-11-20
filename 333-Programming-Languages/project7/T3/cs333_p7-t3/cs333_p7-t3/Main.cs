@@ -6,7 +6,8 @@ namespace cs333_p7t3
 {
 	class MainClass
 	{
-		public static void Main (string[] args)
+		// public static void Main (string[] args)
+		public static void go()
 		{
 			// Open file for writing
 			FileStream fs = new FileStream("timed_trials2", FileMode.OpenOrCreate, FileAccess.Write);
@@ -40,8 +41,7 @@ namespace cs333_p7t3
 		public static void callTheGarbageMan() {
 			
 			Random random = new Random();
-			
-			//set to two more zeros...something went funny.  file didn't overwrite, and didn't diverge much
+		
 			int[] trash = new int[10000000];
         	for (int ii = 0; ii < 10000000; ii++)
             	// set to a random integer
