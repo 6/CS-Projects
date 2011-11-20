@@ -1,0 +1,20 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cs333_p7-t3", "cs333_p7-t3\cs333_p7-t3.csproj", "{B1735749-F460-4C87-B6A4-08C94C3936A1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B1735749-F460-4C87-B6A4-08C94C3936A1}.Debug|x86.ActiveCfg = Debug|x86
+		{B1735749-F460-4C87-B6A4-08C94C3936A1}.Debug|x86.Build.0 = Debug|x86
+		{B1735749-F460-4C87-B6A4-08C94C3936A1}.Release|x86.ActiveCfg = Release|x86
+		{B1735749-F460-4C87-B6A4-08C94C3936A1}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		StartupItem = cs333_p7-t3\cs333_p7-t3.csproj
+	EndGlobalSection
+EndGlobal
