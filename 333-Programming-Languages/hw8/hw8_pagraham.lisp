@@ -1,8 +1,8 @@
 ;; generate a random list of n numbers
 (defun randomList (size maxNum)
   (if ( <= size 0)
-	  '()
-		(cons (random maxNum) (randomList (- size 1) maxNum)) ))
+    '()
+    (cons (random maxNum) (randomList (- size 1) maxNum)) ))
 
 ;; splits a list into 2 halves returns a list of lists containing the left and
 ;; right halves. In cases where list length is odd, the left half will contain
