@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block body -%}
+{% from "_formhelpers.html" import render_field -%}
+<form name=signup action="{{ url_for('signup') }}" method=post>
+<input name=authenticity_token type=hidden value="...TODO...">
+<dl>
+  {{ render_field(form.username, class='textinput round', autocomplete='off') -}}
+  {{ render_field(form.password, class='textinput round', autocomplete='off') -}}
+  {{ render_field(form.email, class='textinput round', autocomplete='off') -}}
+</dl>
+  <input type=submit value="Sign Up &rsaquo;" class=button id=submit>
+</form>
+{% endblock %}

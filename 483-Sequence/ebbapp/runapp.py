@@ -1,0 +1,6 @@
+from google.appengine.ext.webapp.util import run_wsgi_app
+from ebb import app
+from gaesessions import SessionMiddleware
+app = SessionMiddleware(app, cookie_key='\x84\x83\xc2<<u\x82l#\x84\x80\xdfb\xd3\x19\xf5^\xb3\xea\xff\x17\x81RSo\x00, \xca\x92\xbb;\x985Jg\x86..\xb6\xa5\xaa\x86\xd7\xa9\x8d.\xe3\x9f\x03\xda\x87\xdeS\xc4?s\x17\x0eu\xbf')
+
+run_wsgi_app(app)

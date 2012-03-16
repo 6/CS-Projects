@@ -1,0 +1,67 @@
+{% extends "subpage.html" %}
+{% set title = theset.title+' - Image Tagging' %}
+{% block extrahead %}
+<link rel=stylesheet type="text/css" href="{{ url_for('static', filename='imagetagger.css') }}">
+<script type="text/javascript" src="{{ url_for('static', filename='imagetagger.js') }}"></script>
+{%endblock%}
+{% block content %}
+<div class=c>
+<div class="left-align" style="width:{{imgwidth}}px">
+	{%if isEdit and isCreator%}
+		<form method="post" action="{{url_for('modifyTagTitle')}}">
+			<span>Edit Title</span>&nbsp;&nbsp;&nbsp;
+			<input name="title" type="text" class="fancytext fancyinput" value="{{theset.title}}">
+			<input type="submit" class="button" value="Save">
+			<input name=tok type=hidden value="{{ csrf_token() }}">
+			<input name="setid" type="hidden" value="{{theset.key()}}">
+		</form><br>
+	{%endif%}
+<img src="{{url_for('serveImage2',tagSetId=setId)}}" class="taggable{%if isCreator and not isGame and isEdit %} iscreator{%endif%}" alt="Image not uploaded correctly" style="width:{{imgwidth}}px; height:{{imgheight}}px;"><br>
+{%if isGame%}
+<input type=text id="ans" autocomplete="off" style="border:1px solid #000; padding:10px;font-size:16px;width:{{imgwidth}}px"><br>
+
+<div id="messages" class="center-align">
+    <span id="messagetext" class="smallest bold italic uppercase"></span>
+</div>
+<div id="statusbar" class="left-align round">
+    <div id="currentstatus" class="round"></div>
+</div><br>
+
+<div id="playAgain" class="hidden medium center-align section">
+    <a id="playAgainButton" href="#playAgain">Play Again</a>
+</div>
+{%endif%}
+<br>
+</div>
+Share this link: <input class='fancyinput qainput fancytext' id='sharelink' type='text' value="http://{{domain}}{%if isGame%}{{url_for('tagImage',setId=setId,play='play')}}{%else%}{{url_for('tagImage',setId=setId)}}{%endif%}">
+
+<br><br>
+{%if isGame%}
+<a href="{{url_for('tagImage',setId=setId)}}">&larr; Back to review</a>
+{%else%}
+<a href="{{url_for('tagImage',setId=setId,play='play')}}">Play the image tagging game &rarr;</a>
+{%endif%}
+</div>
+<script type="text/javascript">
+var imgwidth = {{imgwidth}};
+var imgheight = {{imgheight}};
+var setId = "{{setId}}";
+isCreator = {%if not isGame and isCreator and isEdit %}true{%else%}false{%endif%};
+isGame = {%if isGame%}true{%else%}false{%endif%};
+ajaxCreatePath = "{{url_for('ajaxAddTag')}}";
+ajaxDeletePath = "{{url_for('ajaxRemoveTag')}}";
+ajaxStatsPath = "{{url_for('addStat',setId=setId)}}";
+
+$(document).ready(function(){
+{%if tags %}
+{% for tag in tags %}
+	addTag("{{tag.term}}", {{loop.index0}}, {{tag.xpos}}, {{tag.ypos}}, "{{tag.key()}}");
+{%endfor%}
+{%endif%}
+{%if isGame%}
+	startGame();
+{%endif%}
+});
+
+</script>
+{% endblock %}

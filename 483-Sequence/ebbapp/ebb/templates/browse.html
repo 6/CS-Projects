@@ -1,0 +1,23 @@
+{% extends "subpage.html" %}
+{% if searchquery %}
+	{% set title = "Search results for: "+searchquery %}
+{% else %}
+	{% set title = "Browse" %}
+{%endif%}
+{% block content %}
+<ol id="results" class="nl">
+{%if results%}
+{%for result in results%}
+	{%set key=result.key()%}
+	<li class="{{ loop.cycle('odd', 'even') }}"><a href="{%if result.settype == 'normal'%}{{url_for('reviewSet',reviewid=key)}}
+		{%else%}{{url_for('tagImage',setId=key)}}
+		{%endif%}">{{result.title}}</a> <div class="r meta">By <a href="{{url_for('profileOf',user=result.user.username)}}">{{result.user.usercased}}</a> 
+			on {{result.getNiceDate()}}</div>
+		
+{%endfor%}
+</ol>
+
+{%else%}
+No sets found.	
+{%endif%}
+{% endblock %}

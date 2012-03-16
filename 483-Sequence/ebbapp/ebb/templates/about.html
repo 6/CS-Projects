@@ -1,0 +1,38 @@
+{% extends "subpage.html" %}
+{% set pagesinfo = [["About Us", url_for('about')],
+    ["Press Room", url_for('about', subpage='press')],
+    ["Contact", url_for('about', subpage='contact')]] %}
+
+{% set title = pagesinfo[subpage][0] %}
+
+{% block content %}
+<ul id=aboutnav class=l>
+{% for page in pagesinfo %}
+    {% if page[0] == title %}
+    <li class=active>{{ page[0] }}
+    {% else %}
+    <li><a href="{{page[1]}}">{{page[0]}}</a>
+    {%endif%}
+{%endfor%}
+</ul>
+<div id=about>
+{% if subpage == 0 %}
+<h3>{{website}} at a glance</h3>
+<p>{{website}} helps you study through personalized learning and fun, educational games.
+ Games on {{website}} support text, images, and sound, so you can review anything from art history to Spanish vocabulary.
+  {{website}} also provides a classroom tool, allowing teachers to track student performance.</p>
+<!--h3>The Team</h3-->
+{% elif subpage == 1 %}
+<h3>Press Contact</h3>
+Please send all press inquiries to:<br><a href="mailto:press@{{domain}}">press@{{domain}}</a>
+<!--h3>{{website}} Logos and Icons</h3>
+If you are running a news piece related to {{website}}, you may download our logo image file to use in connection with the story:
+TODO-->
+{% elif subpage == 2 %}
+<h3>Support</h3>
+We're here to help &mdash; e-mail us at:<br><a href="mailto:support@{{domain}}">support@{{domain}}</a>
+<h3>Legal</h3>
+If you need to report a legal issue, e-mail us at:<br><a href="mailto:legal@{{domain}}">legal@{{domain}}</a>
+{% endif %}
+</div>
+{% endblock %}

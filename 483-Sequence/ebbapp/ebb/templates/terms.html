@@ -1,0 +1,81 @@
+{% extends "subpage.html" %}
+{% set title = "Terms of Service" %}
+{% block content %}
+<div id=terms>
+<p>Date last modified: October 14, 2010</p>
+<h3>1. Your acceptance of Terms</h3>
+<ol>
+<li>These Terms of Service ("Terms") govern your access to and use of {{ website }}. By accessing or using {{ website }}, you agree to be bound by these Terms.
+</ol>
+
+<h3>2. Eligibility</h3>
+<ol>
+<li>You must be at least 13 years of age to use {{ website }}.
+<li>If your user account has been previously removed from {{ website }}, you will not create another account.
+</ol>
+
+<h3>3. User conduct</h3>
+<ol>
+<li>You will not use {{ website }} for any fraudulent, abusive, or otherwise unlawful activity.
+<li>You will not do anything that could disable, overburden, or impair the proper working of {{ website }}.
+<li>You will not facilitate or encourage any violations of these Terms.
+</ol>
+
+<h3>4. Your password and account security</h3>
+<ol>
+<li>You agree that you are responsible for maintaining the confidentiality of the password associated with your user account.
+</ol>
+
+<h3>5. User-submitted content</h3>
+<ol>
+<li>You retain all of your ownership rights to the text content you submit to {{ website }}.
+<li>You understand that you are are solely responsible for all content you submit to {{ website }}.
+<li>By submitting content to {{ website }}, you grant {{ website }} a worldwide, non-exclusive, transferable, sublicensable, royalty-free license to use, reproduce, distribute, adapt, modify, translate, publish, publicly display, and publicly perform such content in any media or distribution methods and for any purpose.
+<li>You agree that anything you submit will not contain third party copyrighted material, unless you have permission from the rightful owner of the material to submit this material.
+</ol>
+
+<h3>6. Notification of claims of infringement</h3>
+<ol>
+<li>{{ website }} respects the intellectual property of others and expects users of {{ website }} to do the same. If you believe that your work has been copied in a way that constitutes copyright infringement, please provide us with the following information:
+<ul>
+<li> A physical or electronic signature of the copyright owner or a person authorized to act on their behalf;
+<li> Identification of the copyrighted work claimed to have been infringed;
+<li>Identification of the material that is claimed to be infringing or to be subject of infringing activity and that is to be removed, and information reasonably sufficient to permit us to locate the material;
+<li>Your contact information, including your address, telephone number, and an e-mail address;
+<li>A statement by you that you have a good faith belief that use of the material in the manner complained is not authorized by the copyright owner, its agent, or the law; and
+<li>A statement that the information in the notification is accurate, and under penalty of perjury, that you are authorized to act on behalf of the copyright owner.
+</ul>
+<p>{{ website }}'s agent for notice of claims of infringement can be reached at: legal@{{ domain }}</p>
+</ol>
+
+<h3>7. Termination</h3>
+<ol>
+<li>{{ website }} may at any time, without prior notice and in its sole discretion, remove or refuse to distribute submitted content, and remove users.
+</ol>
+
+<h3>8. Indemnity</h3>
+<ol>
+<li>You agree to indemnify and hold {{ website }} and its officers, agents, employees, partners and licensors harmless from any claim or demand, including attorneys' fees, arising out of any third party due to or arising out of content you submit or otherwise make available through {{ website }}, your connection to {{ website }}, your violation of the Terms, or your violation of any rights of another.
+</ol>
+
+<h3>9. Disclaimer</h3>
+<ol>
+<li>You agree that the use of {{ website }} is at your sole risk. 
+<li>{{ website }} is provided on an "AS IS" and "AS AVAILABLE" basis and without warranties or representations of any kind either express or implied.
+<li>{{ website }} disclaims all responsibility for the completeness, accuracy, availability, security, or reliability of the service or any content therein.
+<li>{{ website }} makes no claim that {{ website }} may be lawfully accessed outside of the United States. If you access {{ website }} from outside the United States, you do so at your own risk and you are responsible for compliance with the laws of your jurisdiction. 
+</ol>
+
+<h3>10. Limitation of liability</h3>
+<ol>
+<li>{{ website }} shall not be liable for any damages including, without limitation, direct, indirect, incidental, special, consequential, or punitive damages arising out of the use of or inability to use {{ website }}'s services or any content thereon.
+<li>The limitations on {{ website }}'s liability to you shall apply whether or not {{ website }} has been advised of or should have been aware of the possibility of any such losses arising.
+</ol>
+
+<h3>11. Changes to the Terms</h3>
+<ol>
+<li>{{ website }} may revise these Terms at any time. You should periodically review the most up-to-date version of the Terms located at: <a href="{{ url_for('terms') }}">http://{{ domain }}/terms</a>.
+<li>By continuing to use {{ website }} after those revisions become effective, you agree to be bound by the revised Terms.
+</ol>
+</div>
+{% endblock %}

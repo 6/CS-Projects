@@ -1,0 +1,19 @@
+application: ebbapp
+version: 10
+runtime: python
+api_version: 1
+
+handlers:
+- url: /favicon.ico
+  static_files: ebb/static/favicon.ico
+  upload: ebb/static/favicon.ico
+
+- url: /robots.txt
+  static_files: ebb/static/robots.txt
+  upload: ebb/static/robots.txt
+
+- url: /.*
+  script: runapp.py
+
+inbound_services:
+- mail

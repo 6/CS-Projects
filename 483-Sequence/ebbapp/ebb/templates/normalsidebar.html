@@ -1,0 +1,7 @@
+<div class="floatside shadow round l">
+	<h3>Study</h3>
+	<a href="{{url_for('reviewSet',reviewid=setId)}}"><button class="floatsidebutton{%if active=='flashcards'%} active{%endif%}">Flashcards<br><span>Review your set.</span></button></a>
+	<br><br><h3>Play Games</h3>
+	<a href="{{url_for('normalGame',setId=setId, gameType='choice')}}"><button class="floatsidebutton{%if active=='choice'%} active{%endif%}">Simon Says<br><span>Keep going until time runs out!</span></button></a>
+	<a href="{{url_for('normalGame',setId=setId, gameType='text')}}"><button class="floatsidebutton{%if active=='text'%} active{%endif%}">Time Attack<br><span>Type the answer as fast as you can!</button></span></a>
+</div>

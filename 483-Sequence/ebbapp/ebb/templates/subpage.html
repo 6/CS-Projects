@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block body %}
+<div id=navbar>
+  <div class=wrap>
+    {% if links %}<a class=nu href="biology">Language</a>&nbsp;&rsaquo;&nbsp;
+    {% endif %}
+
+{{ title }}{%if isFavable and not isCreator %} 
+<a href="{{url_for('addOrRemoveFav',setId=setId)}}">{%if isFav%}Unfavorite{%else%}Favorite{%endif%}</a>{%endif%}
+{%if setId%}<a href="{{url_for('viewStats',setId=setId)}}">Statistics</a>{%endif%}
+  </div> 
+</div>
+{% if graphbg%}
+<div class="graphbg">
+	{%endif%}
+<div id=subcontent class="wrap{%if graphbg %} subpage-paddingbottom{%endif%}">
+{%if err in errors%}
+<ul class="error ra"><li>{{ errors[err] }}</ul>
+{%endif%}
+<ul class="error ra">
+{% for flash in flashes %}
+  <li>{{ flash }}
+{% endfor %}
+</ul>
+{% block content %}{% endblock %}
+</div>
+{% if graphbg%}
+</div>
+{%endif%}
+{%if sharelink%}
+<br>Share this link: <input class='fancyinput qainput fancytext' id='sharelink' type='text' value="http://{{domain}}{{sharelink}}">
+{%endif%}
+{% endblock %}

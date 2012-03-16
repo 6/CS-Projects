@@ -1,0 +1,159 @@
+html,body,div,p,ul,li,fieldset,label,form,input,textarea,h1,h2,h3{margin:0;padding:0;border:0;font:100% arial,helvetica,sans-serif}
+body{background:#fff;text-align:center}
+a{text-decoration:none;color:#03c;}a:hover{text-decoration:underline;}
+img{border:0}
+
+.l{float:left}.r{float:right}.c{text-align:center;}
+.ra{border-radius:7px 7px 7px 7px;-moz-border-radius:7px;-webkit-border-radius:7px;}
+.rl{border-top-left-radius:7px;border-bottom-left-radius:7px;
+	-moz-border-radius-topleft:7px;-moz-border-radius-bottomleft:7px;
+	-webkit-border-top-left-radius:7px;-webkit-border-bottom-left-radius:7px;}
+.rr{border-top-right-radius:7px;border-bottom-right-radius:7px;
+	-moz-border-radius-topright:7px;-moz-border-radius-bottomright:7px;
+	-webkit-border-top-right-radius:7px;-webkit-border-bottom-right-radius:7px;}
+.rt{border-top-left-radius:7px;border-top-right-radius:7px;
+	-moz-border-radius-topleft:7px;-moz-border-radius-topright:7px;
+	-webkit-border-top-left-radius:7px;-webkit-border-top-right-radius:7px;}
+.rb{border-bottom-left-radius:7px;border-bottom-right-radius:7px;
+	-moz-border-radius-bottomleft:7px;-moz-border-radius-bottomright:7px;
+	-webkit-border-bottom-left-radius:7px;-webkit-border-bottom-right-radius:7px;}
+.cl{overflow:hidden;width:100%;}
+.nl{list-style:none}
+.nu:hover{text-decoration:none;}
+.noglow{outline:none;}
+
+.button{font-size:18px;margin-top:20px;padding:6px 12px;border:1px solid #bbb;text-shadow:0 1px 0 #fff;background:#eee url('g.png') repeat-x top left;cursor:pointer;}
+.button:active{background:#ccc;}
+
+.notice,.error{padding:5px 10px;}
+.error{background:#fbc;margin:0 15px 10px 15px;}
+.notice{bacground:yellow;}
+
+.wrap{width:960px;margin:0 auto;text-align:left;}
+
+#head{}
+	#logo{display:block;width:230px;font-size:40px;font-weight:700;padding-top:9px;}
+	#headright{margin-right:10px;width:720px;text-align:right;}
+	        #search{margin-top:28px;}
+			#searchbar{border:1px solid #9ba;border-right:0;
+				color:#333;font-weight:700;vertical-align:middle;background:#fff;
+				width:270px;height:24px;padding:3px 6px;
+				}
+			#searchgo{cursor:pointer;color:#000;background:#eee url('g.png') repeat-x top left;
+					padding:0 7px;height:32px;vertical-align:middle;
+					border:1px solid #9ba;}
+				#searchgo:active{background:#ccc;}
+			#searchlinks{margin-left:5px;color:#bbb;font-size:19px;}
+				#searchlinks a{font-size:15px;}
+				#browsebutton{background:#af9 url('lightgreenbg.png') repeat-x top left;color:#052;text-shadow:0 1px 1px #cfd;border:1px solid #8db;padding:7px 10px;font-weight:700;margin-left:10px;}
+				.sep{border-left:1px solid #ccc;}
+		.rightlinks{display:block;margin-top:34px;font-size:16px;}
+		.rightlinks a{padding:1px 13px;}
+		.rightlinks a.end{padding-right:2px;}
+			#loginbutton:hover{background:#56d}
+
+#motto{margin:20px 0 0 35px;width:293px;padding:45px 0 0 0;font-weight:400;font-size:30px;height:0;background:url("motto_have-fun_futurabook.png") no-repeat;overflow:hidden;}
+#desc{margin:0 0 20px 35px;color:#38c;font-weight:700;/*text-shadow:0 1px 1px #000;*/}
+
+#convince{}
+	/* FIX HEIGHT problem w/ signup vs infosect */
+	#eg{width:570px;}
+		#screen{height:350px;background:red url('screen.png') no-repeat;}
+	#sign{height:350px;width:390px;}
+	#signup{font-size:18px;color:#440;margin-left:35px;width:250px;padding:10px 0;text-align:center;border:2px solid #dd3;background:#fea;}
+		#signupwrap{margin:6px 15px;text-align:center;}
+			#signupbutton{display:block;font-weight:700;text-shadow:0 1px 1px #000;font-size:19px;padding:9px 10px;background:#e30 url('redgrad.png') repeat-x top left;color:#fff;border:1px solid #b00;}
+				#signupbutton:hover{background:#d00;}
+	#tryit{margin:28px 0 0 80px;}
+
+#content{margin-top:15px;}
+	#browsenav{width:200px;text-align:left;margin-top:2px;border-bottom:1px solid #ace;list-style:none;padding:3px 0 1px 760px; /*THIRD number change*/}
+		#browsenav li{display:inline;}
+			#browsenav #browsetab{background:#fff;color:#000;border:1px solid #ace;border-bottom:0;font-weight:700;position:relative;top:0px;padding-top:4px; /*change*/}
+		#browsenav li a {border:1px solid #bbb;background:#ccd;color:#333;margin-right:10px;text-decoration:none;border-bottom:none;padding:3px 10px; /*FIRST number change*/}
+		#browsenav a:hover{background:#fff;}
+	#categorylist{width:179px;text-align:center;border:1px solid #ace;border-width:0 0 1px 1px;font-size:13px;}
+		#categorylist li a{background:#eef;width:179px;display:block;padding:5px 0;border-top:1px solid #fff;color:#13d;} /* FIX IE6 */
+		#categorylist li a:hover{background:#79f;color:#fff;}
+			#categorylist li a#curcategory{font-weight:700;background:#79f;color:#fff;}
+	#browse{width:780px;}
+		#browsecontent{border-left:1px solid #ace;font-size:14px;padding:8px 0 0 8px;background:#fff;}
+			#browsecontent li{background:#ffe;}
+				#browsecontent li.rowb{background:#f4f4f4;}
+				#browsecontent li:hover,#browsecontent li.rowb:hover{background:#fcc url('blueon.png') repeat-x top left;}
+			#browsecontent li span{display:block;padding:8px 2px;}
+			#browsecontent li a{font-weight:700;display:block;padding:8px 8px;}
+				#browsecontent li a.title{width:500px;}
+				#browsecontent li a.cat{color:#77a;}
+			#browsecontent li span.rating{}
+			
+		
+#foot{border-top:1px solid #bbb;margin-top:25px;padding:4px 2px 15px;color:#666;font-size:13px;text-align:right;}
+	#foot a{margin:0 10px;}
+
+/* LANDING */
+#landing{padding-bottom:25px;}
+#nowplaying{background:#fff;border:1px solid #abe;border-left:0;width:268px;height:298px;padding-top:20px;}
+#demo{margin-top:1px;width:690px;height:320px;background:#46a;color:#fff;}
+#nowplayingwrap{border:1px solid #cef;border-left:0;}
+.landinggame{padding:12px 20px;font-size:18px;color:#236;background:#dbf2ff url(llblue.png) repeat-x top left;margin-right:13px;cursor:pointer;border:1px solid #7ce;border-width:1px 1px 0 0;display:block;}
+.nowplayingbottom{border-bottom:1px solid #7ce;}
+.landinggame:hover{color:#36c;}
+.landinggame#landinggamecur{text-shadow:0 1px 0 #cef;background:#9ef url('blueon.png') repeat-x top left;color:#239;border:1px solid #6be;border-left:0;}
+#landinggamecur p{font-size:13px;font-weight:700;padding-top:2px;}
+#landingbrowse{background:#af9 url('lightgreenbg.png') repeat-x top left;color:#052;text-shadow:0 1px 1px #cfd;border:1px solid #8db;padding:12px 20px;font-weight:700;font-size:20px;display:block;margin:20px 20px 0;}
+#landingbrowse:hover,#browsebutton:hover{color:#081;}
+
+#landingbottom{}
+#landinginfos{width:690px;}
+#landingpitch{font-size:34px;text-align:center;font-weight:700;padding:14px 0 17px;color:#36b;text-shadow:1px 2px 1px #fff;}
+.landinginfo{font-size:15px;border-left:1px solid #ddd;width:190px;margin-top:22px;padding:10px 25px 10px 20px;}
+.landingfirst{border-left:0;padding-left:0;}
+.landinginfo h3{display:inline;font-size:17px;font-weight:700;color:#1a0;/*padding-left:2px;background:#e9f9ff;border-bottom:1px solid #cef;*/}
+.landinginfo p{line-height:1.3;margin-top:5px;color:#555;}
+#landingsignupwrap{width:270px;}
+#landingsignup{display:block;font-weight:700;text-shadow:0 1px 1px #000;font-size:26px;padding:10px 0 5px;line-height:1.1;background:#d20 url('redgrad.png') repeat-x top left;color:#fff;border:1px solid #b00;margin:25px 20px 0;}
+#landingsignup:hover{color:#feb;}
+#landingsignup span{font-size:18px;}
+
+
+#subcontent{padding-top:15px;line-height:1.5;color:#113;}
+#subcontent form{margin-left:40px;}
+
+#formdesc{font-size:15px;padding:15px 0;margin-left:40px;}
+.top{padding-top:5px;}
+.mid{padding-top:20px;}
+.inputtitle{font-size:19px;padding-bottom:5px;}
+.inputnote{font-size:11px;color:#666;margin-top:2px;}
+.fancyinput{border:1px solid #999;}
+.fancyinput:focus{border-color:#000;}
+.fancytext{padding:5px;font-size:18px;}
+#lessontitle{width:420px;}
+.fancyselect{font-size:16px;}
+textarea{width:420px;
+	height:80px;
+	padding:7px;
+}
+#questions{margin:25px 0 15px 0;border-top:1px dotted #bbb}
+.qainput{margin:3px 10px 13px 0;width:250px;}
+#navbar{border:1px solid #bce;border-width:1px 0;background:#def url('llblue.png') repeat-x top left;color:#239;font-weight:bold;font-size:24px;padding:4px 0 3px;}
+#navbar a{color:#acf;}
+#addmorebutton{font-weight:700;font-size:19px;padding:9px 10px;text-shadow:0 1px 0 #eee;background:#03e url('blueon.png') repeat-x top left;color:#239;border:1px solid #8cf;}
+#addmorebutton:hover{}
+
+#gamewrap{margin-top:25px;}
+#game{height:370px;width:650px;background:#bbf;font-size:22px;}
+#relatedcontent{width:310px;height:370px;background:pink;font-size:22px;}
+#gamedesc{background:#fefefe;border:1px solid #ccc;width:608px;padding:5px 20px;line-height:1.5;font-size:14px;}
+
+/* LOGIN */
+#forgot{margin-left:13px;font-size:13px;}
+
+/* REGISTER */
+#agreement{margin:20px 0 0;font-size:14px;line-height:1.4;width:370px;}
+
+/* TERMS */
+#terms{font-size:13px;}
+#terms h3{font-weight:700;font-size:16px;margin:20px 0 0 0;}
+#terms ol{list-style-type:upper-alpha;}
+#terms ul{padding:10px 20px;list-style-type:disc;}

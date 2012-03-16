@@ -1,0 +1,53 @@
+{% extends "subpage.html" %}
+{%if private %}
+    {% set title = settitle+' (Private)' %}
+{%else%}
+    {% set title = settitle %}
+{%endif%}
+{%set thisController = 'reviewSet' %}
+{%set graphbg = "yes"%}
+{%set sharelink = url_for('reviewSet',reviewid=setId) %}
+{% block extrahead %}
+<link rel=stylesheet type="text/css" href="{{ url_for('static', filename='review.css') }}">
+<script type="text/javascript" src="{{ url_for('static', filename='review.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+
+{%set active='flashcards'%}
+{% include 'normalsidebar.html' %}
+
+<div class="review floatgraph floatgraphsidepad round shadow">
+	
+    <a id="swap" class="l" href="0?swap"><button id="swapbtn">Swap<br>sides</button></a> 
+	<a id="alwaysshow" class="l" href="0?alwaysshow"><button id="alwaysbtn">Always show<br>answer</button></a> 
+	<div id="counter"></div><br> 
+	<div class=c> 
+    	<div id=view> 
+        	<div id=caption></div> 
+        	<h2 id=prompt class="bold bigger"></h2> 
+        	<p id=answer class=ra></p> 
+    	</div> 
+    	<div id=controls> 
+        	<a id=prev href="TODO-datalength-1"><button>&larr; Prev</button></a><a id=show href="0?show"><button id=answerbtn>Show Answer</button></a><a id=next href="1"><button>Next &rarr;</button></a> 
+    	</div>
+	</div>
+</div>
+
+</div>
+<!-- TODO fix term definition being switched -->
+<textarea id="data" class="hidden">
+[
+{%set comma='' %}
+{% for term in terms %}
+    {% set definition = term.answertext %}
+	{% if term.answertype == 'blob' %}
+		{%set definition = url_for('serveImage',studyDataId=term.key()) %}
+	{% endif %}
+    {{comma}}{"type":"{{term.answertype}}", "prompt": "{{ definition}}", "answer": "{{term.prompttext}}"}
+    {%set comma=',' %}
+{%endfor%}
+]
+</textarea>
+<div id="imagedumpster" class="hidden"></div>
+{% endblock %}

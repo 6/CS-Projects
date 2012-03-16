@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% set title = "Have fun learning." %}
+{% block body %}
+Welcome, {{ userId }}. <a href="{{ url_for('logout') }}">Logout</a>
+{% endblock %}

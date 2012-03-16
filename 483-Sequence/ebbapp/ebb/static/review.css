@@ -1,0 +1,18 @@
+.review button{padding:3px 7px;font-size:15px}
+/*.l{float:left}
+.c{text-align:center}
+.ra{border-radius:7px}*/
+.pressed{background:#888;color:#fff;border:2px solid #999}
+#view{height:330px;}
+#swap{display:block;}
+#alwaysshow{display:block;margin-left:5px}
+#counter{margin-left:130px;text-align:right;font-size:21px;color:#777}
+#counter span{padding-right:5px;font-size:28px;color:#000}
+ 
+
+#prompt{margin:0;padding-bottom:20px;font-size:45px}
+#prompt.text{padding-top:100px;height:260px}
+#answer{display:inline;margin:0 auto;font-size:30px;}
+#answer.text{padding:6px 10px;position:relative;top:-200px;background:#def;border:1px solid #ace}
+ 
+#controls button{margin:0 10px;padding:10px;}

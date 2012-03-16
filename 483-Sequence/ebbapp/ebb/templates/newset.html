@@ -1,0 +1,47 @@
+{% extends "subpage.html" %}
+{% set title = "Create a Study Set" %}
+{% block content %}
+    <form action="{{ url_for('submitSet') }}" enctype="multipart/form-data" method="post">
+            <h3 class=inputtitle>Enter a title</h3>
+            <input id=lessontitle name="title" class="fancyinput fancytext" type=text value="{%if settitle %}{{settitle}}{%endif%}">
+            <br><br>
+            <h3 class=inputtitle>Privacy</h3>
+            <input type="radio" name="privacy" value="public"{%if not private %}checked{%endif%}> Public&nbsp;&nbsp;&nbsp;
+            <input type="radio" name="privacy" value="private"{%if private%}checked{%endif%}> Private
+            <br><br>
+            <h3 class=inputtitle>Enter terms and definitions</h3>
+            Set all definitions to: <a id="alltext" href="#alltext">Text</a> or <a id="allimg" href="#allimg">Image</a>
+            <table id=data cellpadding=0 cellspacing=0>
+                <tr>
+                    <th class="bold borderleft">Term</th>
+                    <th class=bold>Definition</th>
+                    <th></th>
+                </tr>
+                
+                {%if not answers and not prompts and not deftypes %}
+                    <!-- 3 terms and defs by default -->
+                    {% set prompts = ['','',''] %}
+                    {% set answers = ['','',''] %}
+                    {% set deftypes = ['text','text','text'] %}
+                {%endif %}
+                {% for prompt in prompts %}
+                    {%set answer=answers[loop.index0]%}
+                    {%set deftype=deftypes[loop.index0]%}
+                    <tr>
+                    <td class="borderleft"><input name="prompt" class="qainput fancyinput fancytext" type=text value="{{prompt}}"></td>
+                    <td>
+                        <a href="#text" class="newsettext{%if deftype == 'text' %} active{%endif%}">Text</a>&nbsp;&nbsp;<a class="newsetimg{%if deftype != 'text' %} active{%endif%}" href="#image">Image</a>
+                        <input name="answer{%if deftype != 'text'%}_inactive{%endif%}" class="{%if deftype != 'text'%}hidden {%endif%}qainput fancyinput fancytext" type=text value="{{answer}}">
+                        <input name="answer{%if deftype != 'img' and deftype != 'blob' %}_inactive{%endif%}" class="{%if deftype != 'img' and deftype != 'blob' %}hidden {%endif%}qainput fancyinput fancyfile" type=file> <!--can't do value -- AJAX upload? -->
+                        <input class="deftype" type="hidden" name="deftype" value="{%if deftype == 'text'%}text{%else%}img{%endif%}"></td>
+                    <td class="c"><a class="removeterm" href="#delete">Remove</a></td>
+                    </tr>
+                {%endfor %}
+                
+            </table>
+        <br><a id=addmorebutton class="ra nu" href="#">+ add term</a><br><br>
+        <input class="button" type=submit value="Submit Set &raquo;">
+        <input name=tok type=hidden value="{{ csrf_token() }}">
+		<input name="isedit" type=hidden value="{%if isEdit%}{{setId}}{%else%}no{%endif%}">
+    </form>
+{% endblock %}

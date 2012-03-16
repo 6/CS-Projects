@@ -1,0 +1,50 @@
+{% extends "subpage.html" %}
+{% set title = theset.title+" Statistics" %}
+
+{%block extrahead%}
+	<script type="text/javascript" src="{{ url_for('static', filename='jquery.flot.js') }}"></script>
+{%endblock%}
+
+{% block content %}
+<h2 class="bigfont">Overall Statistics</h2>
+<div id="chart1" style="margin:20px 0;width:620px;height:260px"></div>
+<b>X-axis:</b> Overall percentage of questions answered correctly. <b>Y-axis:</b> Number of people.<br>
+<b>Mean:</b> {{mean}}% correct.
+<br><br><br>
+<h2 class="bigfont">Individual Question Statistics</h2>
+<ul id="statslist">
+{% for stat in stats %}
+	{%set term=stat[0]%}
+	{%set newWidth=stat[2]%}
+	{%set percCorrect=stat[1]%}
+	{%set N=stat[3]%}
+	<li><b>{{term}}</b> <div class="right">{%if N > 0 %}<strong>{{percCorrect}}%</strong> correct. Number of people: <strong>{{N}}</strong>{%else%}No one has tried this yet.{%endif%}</div>
+		<div class="round statsbar{%if N>0%} active{%endif%}">
+            <div class="correct round"{%if N>0 %} style="width:{{newWidth}}px"{%endif%}></div>
+        </div>
+{%endfor%}
+</ul>
+{% endblock %}
+
+{% block onReady%}
+    var d1 = [];
+	{% for stat in distr %}
+		d1.push([{{loop.index0 * 10}}, {{stat}}]);
+	{%endfor%}
+ 
+    
+    $.plot($("#chart1"), [ d1 ], {
+		series: {
+		                lines: { show: false, fill: true, steps: false },
+		                bars: { show: true, barWidth: 10}
+		            },
+		xaxis: {
+		            ticks: [0, 10, 20, 30, 40, 50, 60, 70, 80,90,100]
+		        },
+				grid: {
+				            backgroundColor: { colors: ["#fff", "#eee"] }
+				        },
+		colors: [ "#77f" ]
+	});
+
+{%endblock%}

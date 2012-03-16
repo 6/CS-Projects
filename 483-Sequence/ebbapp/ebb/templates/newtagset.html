@@ -1,0 +1,18 @@
+{% extends "subpage.html" %}
+{% set title = "Upload an Image" %}
+{% block content %}
+    <form action="{{ url_for('submitTagSet') }}" enctype="multipart/form-data" method="post">
+            <h3 class=inputtitle>Enter a title</h3>
+            <input id=lessontitle name="title" class="fancyinput fancytext" type=text value="{%if settitle %}{{settitle}}{%endif%}">
+            <br><br>
+<h3 class=inputtitle>Choose an image to tag:</h3>
+			<input name="image" class="fancyinput fancytext" type=file>
+<br><br>
+            <h3 class=inputtitle>Privacy</h3>
+            <input type="radio" name="privacy" value="public"{%if not privacy or privacy == 'public'%}checked{%endif%}> Public&nbsp;&nbsp;&nbsp;
+            <input type="radio" name="privacy" value="private"{% if privacy == 'private'%}checked{%endif%}> Private
+<br>
+        <input class="button" type=submit value="Start Tagging Image &raquo;">
+        <input name=tok type=hidden value="{{ csrf_token() }}">
+    </form>
+{% endblock %}

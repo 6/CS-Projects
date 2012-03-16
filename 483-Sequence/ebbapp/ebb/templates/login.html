@@ -1,0 +1,15 @@
+{% extends "subpage.html" %}
+{% set title = "Login" %}
+{% set focus = "username" %}
+{% set errors = {1: 'Incorrect username or password.'} %}
+{% block content %}
+<form action="{{ url_for('auth_login') }}" method=post>
+  <h3 class="inputtitle top">Username</h3>
+  {{ input('username', tabindex=1, maxlength=20, value=u) }}<br>
+  <h3 class="inputtitle mid">Password <!--a id=forgot href="{{ url_for('resetPassword') }}">Forgot password?</a--></h3>
+  {{ input('password', tabindex=2, type='password', maxlength=100) }}<br>
+  <input class=button type=submit value="Login" tabindex=3><span id=orcreateaccount> or <a href="{{ url_for('register') }}">Create an account</a></span>
+  <input name=next type=hidden value="{% if next %}{{ next }}{% endif %}">
+  <input name=tok type=hidden value="{{ csrf_token() }}">
+</form>
+{% endblock %}

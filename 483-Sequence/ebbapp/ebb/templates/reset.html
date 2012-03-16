@@ -1,0 +1,19 @@
+{% extends "subpage.html" %}
+{% set title = "Reset Password" %}
+{% set focus = "email" %}
+{% block content %}
+{% if succ %}
+We've sent you an e-mail.<br>Please follow the instructions in that e-mail to reset your password.
+{% else %}
+{% if err %}
+<div class=error>E-mail address not found.</div>
+{% endif %}
+<p id=formdesc>We'll send a link to your e-mail address which you can use to reset your password.</p>
+<form action="{{ url_for('auth_reset') }}" method=post>
+  <h3 class="inputtitle top">E-mail</h3>
+  <input name=e id=email class="fancyinput fancytext" type=text autocomplete=off tabindex=1 value="{% if e %}{{ e }}{% endif %}"><br>
+  <input class=button type=submit value="Send">
+  <input name="tok" type=hidden value="{{ csrf_token() }}">
+</form>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% set title = "Learn by playing games." %}
+{% set footernotop = 1 %}
+{% block extrahead %}
+<script type="text/javascript" src="{{ url_for('static', filename='multchoicegame.js') }}"></script>
+<link rel=stylesheet type="text/css" href="{{ url_for('static', filename='game.css') }}">
+{% endblock %}
+{% block body %}
+<div id=landingwrap1><div id=landingwrap2>
+  <div id=quickinfo class=wrap>
+    <h1 id=landingpitch class='l c'>Learn anything.</h1>
+    <div id=pitchright>
+        <div class='pitchdetails l'><b>Create flashcards</b> of what you want to learn.</div>
+        <div class='pitchdetails l'><b>Study</b> using {{website}}'s quizzes and fun games.</div>
+        <!--div class='pitchdetails l'><b>Track your progress</b>, see your improvements.</div-->
+        <div id=landingsignupwrap class="l c">
+            <a id=landingsignup class="ra nu" href="{{ url_for('register') }}">Create an Account</a>
+        </div>
+        <div id=itsfree class=l>It's free!</div>
+    </div>
+  </div>
+  <div id=landingdemos class="wrap">
+    <div id=nowplayingwrap class="ra">
+      <div id=nowplaying class='ra c'> <div id="game-main" class="center-align l">
+        <div id="bonus" class="uppercase center-align bold smallest round"></div>
+        <div id="prompt" class="bold bigger">Loading...</div>
+        <h2 class="smaller grey center-align">
+			Possible answers:
+			</h2>
+        
+		
+		<div id="answerNumber0" class="bold answer medium left">Loading...</div>
+        <div id="answerNumber1" class="bold answer medium">Loading...</div>
+		
+        <div id="messages" class="center-align">
+            <span id="messagetext" class="smallest bold italic uppercase"></span>
+        </div>
+    </div>
+
+	<div id="game-sidebar" class="medium center-align">
+        <div id="scoreSection" class="section">
+            <span class="smaller">Time</span><br><span id=timer class="medium"></span><br>
+            <span class="smaller">Score</span><br><span id=score class="bigger"></span><br>
+            <span id="scoreChange" class="medium"></span>
+        </div>
+        <div id="smile">
+            <img id="smile0" src="{{ url_for('static', filename='0.png') }}" class="smile">
+            <img id="smile1" src="{{ url_for('static', filename='1.png') }}" class="hidden smile">
+            <img id="smile2" src="{{ url_for('static', filename='2.png') }}" class="hidden smile">
+        </div>
+        <div id="playAgain" class="hidden section">
+            <a id="playAgainButton" href="#playAgain">Play Again</a>
+        </div>
+    </div>
+
+            <div class="clear">&nbsp;</div>
+            <div id="game-selector" class="left-align">Select a game: <a href="/">Mitosis stages</a> or <a href="/1">Shakespeare vocab</a> or <a href="/2">Common GRE words</a></div>
+           <textarea id="data" class="hidden">
+[
+{%set comma='' %}
+{% for term in terms %}
+    {% set definition = term.answertext %}
+	{% if term.answertype == 'blob' %}
+		{%set definition = url_for('serveImage',studyDataId=term.key()) %}
+	{% endif %}
+    {{comma}}{"type":"{{term.answertype}}", "prompt": "{{ definition}}", "answer": "{{term}}", "termId":"{{term.key()}}" }
+    {%set comma=',' %}
+{%endfor%}
+]
+</textarea> 
+            <div id="imagedumpster" class="hidden"></div>
+      </div>
+    </div>
+  </div>
+</div></div>
+<script type="text/javascript">
+isMultChoice =true; 
+ajaxStatsPath = "{{url_for('addStat',setId=setId)}}";
+</script>
+
+{% endblock %}

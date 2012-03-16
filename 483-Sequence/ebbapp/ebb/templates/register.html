@@ -1,0 +1,20 @@
+{% extends "subpage.html" %}
+{% set title = "Create an Account" %}
+{% set focus = "username" %}
+{% set errors = {1: 'All fields must be filled out.',
+2: 'Please enter a valid username, e-mail, and password.', 
+3: 'That username is already taken.'} %}
+{% block content %}
+<form action="{{ url_for('auth_register') }}" method=post>
+  <h3 class="inputtitle top">Username <span>(a-z and 0-9 allowed)</span></h3>
+  {{ input('username', tabindex=1, value=u, maxlength=20) }}
+  <h3 class="inputtitle mid">E-mail <span>(private)</span></h3>
+  {{ input('email', tabindex=2, value=e, maxlength=100) }}
+  <h3 class="inputtitle mid">Password <span>(6 or more characters)</span></h3>
+  {{ input('password', tabindex=3, type='password', maxlength=100) }}
+  <p id=agreement>By clicking 'Create Account' below you agree to the {{websiteName}} <a href="{{url_for('terms')}}">Terms of Service</a> and <a href="{{url_for('privacy')}}">Privacy Policy</a>.</p>
+  <input class=button type=submit value="Create Account" tabindex=4>
+  <input name=next type=hidden value="{% if next %}{{ next }}{% endif %}">
+  <input name=tok type=hidden value="{{ csrf_token() }}">
+</form>
+{% endblock %}

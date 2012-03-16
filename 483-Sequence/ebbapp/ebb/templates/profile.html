@@ -1,0 +1,55 @@
+{% extends "subpage.html" %}
+{% set title = user+"'s Profile" %}
+{% block content %}
+{% set isOwnProfile = user == g.userId%}
+{% if isOwnProfile %}
+<!--a href="{{ url_for('settings') }}">Edit</a-->
+{% endif %}
+
+{% if sets %}
+{{user}}'s normal study sets:<br>
+<table>
+    {% for studyset in sets %}
+		{% if isOwnProfile%}
+		{% set isCreator = studyset.user.username.lower() == g.userId.lower() %}
+		{%endif%}
+		{% if isCreator or not studyset.isprivate %}
+    		<tr>
+        		{% set skey = studyset.key() %}
+        		<td>
+					<a href="{{ url_for('reviewSet', reviewid=skey) }}">{{studyset.title}}</a>
+					{%if isCreator %}
+						&nbsp;(<a href="{{url_for('editSet',setId=skey)}}">edit</a>)
+					{%endif%}
+				</td>
+	    	</tr>
+		{%endif%}
+    {% endfor %}
+</table>
+{% else %}
+    No study sets added yet.
+{% endif %}<br>
+
+{% if imgsets %}
+{{user}}'s image study sets:<br>
+<table>
+    {% for img in imgsets %}
+	{% if isOwnProfile%}
+	{% set isCreator = img.user.username.lower() == g.userId.lower() %}
+	{%endif%}
+	{% if isCreator or not img.isprivate %}
+    <tr>
+        {% set skey = img.key() %}
+        <td><a href="{{ url_for('tagImage', setId=skey) }}">{{img.title}}</a> {%if isCreator %}
+		&nbsp;(<a href="{{url_for('tagImage',setId=skey,play='edit')}}">edit</a>)
+		{%endif%}</td>
+    </tr>
+	{%endif%}
+    {% endfor %}
+</table>
+{% else %}
+    No image study sets added yet.
+{% endif %}<br>
+ {% if isOwnProfile %}<a href="{{ url_for('setChooser') }}"><button class="button">Create a new set &rarr;</button></a>{%endif%}
+
+{% endblock %}

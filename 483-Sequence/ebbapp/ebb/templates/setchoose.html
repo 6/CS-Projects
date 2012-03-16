@@ -1,0 +1,17 @@
+{% extends "subpage.html" %}
+{% set title = 'Choose a set type' %}
+{%set graphbg = "yes"%}
+{%set footernotop = "yes"%}
+{% block content %}
+<div class="setchoose leftfloatgraph l floatgraph round shadow">
+	<h3><a href="{{ url_for('newSet') }}">Terms and Definitions &rarr;</a></h3>
+	<a href="{{ url_for('newSet') }}"><img src="{{ url_for('static', filename='terms-screen.png') }}"></a>
+	<div class="description">Build a set from matched pairs of terms and definitions.</div>
+</div>
+<div class="setchoose rightfloatgraph r floatgraph round shadow">
+	<h3><a href="{{ url_for('newTagSet') }}">Tagged Image &rarr;</a></h3>
+	<a href="{{ url_for('newTagSet') }}"><img src="{{ url_for('static', filename='tag-screen.png') }}"></a>
+	<div class="description">Upload an image, and tag the image with terms.</div>
+</div>
+<div class="clear">&nbsp;</div>
+{% endblock %}

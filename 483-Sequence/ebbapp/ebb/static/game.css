@@ -1,0 +1,43 @@
+.instruct{padding:20px 0px}
+.instruct li{padding:15px 0}
+
+.grey{color:#777}
+.smallest{font-size:17px}
+.smaller{font-size:20px}
+.medium{font-size:30px}
+.bigger{font-size:45px}
+.bold{font-weight:700}.italic{font-style:italic}.uppercase{text-transform:uppercase}
+.round{border-radius:7px;-moz-border-radius:7px}
+
+.left{float:left}
+.right{float:right}
+.center-align{text-align:center;}
+.left-align{text-align:left}
+.right-align{text-align:right}
+.hidden{display:none}
+
+/*.button{padding:6px 15px;background:#def url('blue.png') repeat-x top left;color:#57b;border:1px solid #ace}
+.button:hover{color:#46a;border-color:#8bd}
+.button:active{background:#cde}*/
+
+#game-main{width:550px;position:relative}
+    #bonus{position:absolute;left:0;padding:8px 12px 3px;background:#333;background:rgba(0, 0, 0, 0.6);color:#fff}
+    #prompt.text{padding:50px 0} #prompt.image{height:310px;padding:10px 0}
+    .answer{padding:10px;width:255px;color:#666;background:#eee;border:1px solid #ccc;cursor:pointer}  
+    .answer:hover{color:#000}
+    /*.answer:hover{background:#fafafa}*/
+    #answerNumber1{margin-left:272px}/*TODO more generic */
+    .control{padding:20px}
+        .keyboardKey{padding:0 2px 2px;font-weight:700;background:#eee;border:3px solid #bbb;border-top:4px solid #ddd}
+            .pressed{background:#aaa}
+    #statusbar{margin-top:20px;height:15px;background:#ddd}
+        #currentstatus{width:0;height:15px;background:#67e}
+    #messages{padding:10px 0;background:#aaa/* url('bg-dgrey.png') repeat-x top left*/;color:#fff;border:1px solid #888}
+    
+#game-sidebar{padding-top:5px;width:120px;margin-left:550px;}
+    #playAgain{}
+    #smile{margin-top:30px}
+
+#game-selector{padding:20px 20px 0;font-size:20px}
+
+/*#data{width:560px;height:100px}*/

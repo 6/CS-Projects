@@ -1,0 +1,20 @@
+{% extends "subpage.html" %}
+{% set title = "Reset Password" %}
+{% set focus = "password" %}
+{% block content %}
+{% if succ %}
+Your password has been reset. <a href="{{ url_for('login') }}">Login to your account</a>.
+{% else %}
+{% if err %}
+<div class=error>Password must be at least 6 characters long.</div>
+{% endif %}
+<form action="{{ url_for('auth_reset2') }}" method=post>
+  <h3 class="inputtitle top">New Password</h3>
+  {{ input('password', tabindex=1, type='password', maxlength=100) }}<br>
+  <input class=button type=submit value="Reset Password" tabindex=2>
+  <input name=email type=hidden value="{%if email%}{{ email }}{%endif%}">
+  <input name=key type=hidden value="{%if key%}{{ key }}{%endif%}">
+  <input name="tok" type=hidden value="{{ csrf_token() }}">
+</form>
+{% endif %}
+{% endblock %}

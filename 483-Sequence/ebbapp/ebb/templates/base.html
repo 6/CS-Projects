@@ -1,0 +1,66 @@
+{%set website = "PlayZam"%}
+{%set domain = "playzam.com"%}
+{%macro input(name, id, class="fancyinput fancytext", tabindex=0, type="text", value="", maxlength=0)%}
+{%if id == errid %}
+class = class + " highlight"
+{%endif%}
+<input name="{{name}}" id="{{name}}" class="{{class}}" type={{type}} autocomplete=off{%if tabindex > 0%} tabindex={{tabindex}}{%endif%}{%if maxlength > 0%} maxlength={{maxlength}}{%endif%} value="{{value}}">
+{%endmacro%}
+<!-- TODO fix macro base -->
+<!doctype html><html><head>
+<title>{{ website }}{% if title %} - {{ title }}{% else %}TODO_TITLE{% endif %}</title>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta http-equiv="imagetoolbar" content="no">
+<link rel=stylesheet type="text/css" href="{{ url_for('static', filename='all.css') }}">
+<link rel=stylesheet type="text/css" href="{{ url_for('static', filename='game.css') }}">
+<!--script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.1/jquery.min.js"></script-->
+<script type="text/javascript" src="{{ url_for('static', filename='jquery-1.5.1.min.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='jquery.color.js') }}"></script>
+<script type="text/javascript" src="{{ url_for('static', filename='general.js') }}"></script>
+{% block extrahead %}{% endblock %}
+</head>
+<body>
+
+<div id=head> 
+  <div class=wrap> 
+    <div id=logo class=l>
+        <a href="{{ url_for('index') }}"><img id=logoimg src="{{ url_for('static', filename='playzam-small.png') }}" alt="{{ website }}"></a>
+    </div>
+    <div id=headright class=l> 
+      <form id=search class=l action="{{ url_for('search') }}" method=get>
+    <input name=q id=searchbar type=text value="{%if searchquery%}{{searchquery}}{%endif%}" autocomplete=off maxlength=128><input id=searchgo class=rr type=submit value="Search">
+      </form>
+      <span class=rightlinks>
+		<a href="{{ url_for('browse') }}">Browse</a>
+      {% if not g.userId %}
+      <a class=end href="{{ url_for('login') }}">Login</a>
+      {% else %}
+      <a href="{{ url_for('setChooser') }}">Make a New Set</a><a href="{{ url_for('profileOf', user=g.userId) }}">Profile</a><!--a class=sep href="{{ url_for('settings') }}">Settings</a--><a class="sep end" href="{{ url_for('logout') }}">Logout</a>
+      {% endif %}
+      </span>
+    </div> 
+  </div> 
+</div>
+<div class="clear">&nbsp;</div>
+{% block body %}{% endblock %}
+
+<div id=foot class="wrap{%if footernotop %} notop{%endif%}">
+  <span class=l>&copy; 2011 {{ website }}</span>
+ <a href="{{ url_for('about') }}">About</a><a href="{{ url_for('about', subpage='contact') }}">Contact</a><a href="{{ url_for('about', subpage='press') }}">Press</a><a href="{{ url_for('terms') }}">Terms</a><!--a href="{{ url_for('privacy') }}">Privacy</a><a href="{{ url_for('help') }}">Help</a-->
+</div>
+{% if focus %}
+ {% if oFocus %}
+  {% set focus = oFocus %}
+ {% endif %}
+<!--script type="text/javascript">
+$(document).ready(function() {
+if(isEmpty($('#{{ focus }}'))) $('#{{ focus }}').focus();
+});
+</script-->
+{% endif %}
+
+<script type="text/javascript">
+$(document).ready(function() {
+	{%block onReady%}{%endblock%}
+});
+</script>

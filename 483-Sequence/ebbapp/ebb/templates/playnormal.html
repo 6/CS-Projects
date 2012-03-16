@@ -1,0 +1,94 @@
+{% extends "subpage.html" %}
+{%if type=='choice'%}
+{%set game='Multiple Choice'%}
+{%else%}
+{%set game='Fill in the Blank'%}
+{%endif%}
+{%if private %}
+    {% set title = set.title+' - '+game+' (Private)' %}
+{%else%}
+    {% set title = set.title+' - '+game %}
+{%endif%}
+{% block extrahead %}
+<link rel=stylesheet type="text/css" href="{{ url_for('static', filename='game.css') }}">
+{%if type == 'choice' %}
+<script type="text/javascript" src="{{ url_for('static', filename='simongame.js') }}"></script>
+{%else %}
+<script type="text/javascript" src="{{ url_for('static', filename='multchoicegame.js') }}"></script>
+{%endif%}
+{% endblock %}
+
+{%set sharelink = url_for('normalGame',setId=setId,gameType=type) %}
+{%set graphbg = "yes"%}
+{% block content %}
+
+{%set active=type%}
+{% include 'normalsidebar.html' %}
+
+<div class="c floatgraph floatgraphsidepad round shadow nopaddingright">
+
+    <div id="game-main" class="center-align l">
+        <div id="bonus" class="uppercase center-align bold smallest round"></div>
+         <div id="lives" class="uppercase right-align bold smallest round"></div>
+        <div id="prompt" class="bold bigger">Loading...</div>
+        <h2 class="smaller grey center-align">
+			{%if type=='choice'%}Possible answers:
+			{%else%}Type your answer here:
+			{%endif%}
+			</h2>
+        
+		{%if type=='choice'%}
+		<div id="answerNumber0" class="bold answer medium left">Loading...</div>
+        <div id="answerNumber1" class="bold answer medium">Loading...</div>
+		{%else%}
+		<input id = "ans" type="text" name="inputbox" value="" autocomplete="off" style="border:1px solid #000; padding:10px;font-size:16px">
+		{%endif%}
+		
+        <div id="messages" class="center-align">
+            <span id="messagetext" class="smallest bold italic uppercase"></span>
+        </div>
+{%if type != 'choice' %}
+        <div id="statusbar" class="left-align round">
+            <div id="currentstatus" class="round"></div>
+        </div>
+{%endif%}
+    </div>
+
+	<div id="game-sidebar" class="medium center-align">
+        <div id="scoreSection" class="section">
+            <span class="smaller">Time</span><br><span id=timer class="medium"></span><br>
+            <span class="smaller">Score</span><br><span id=score class="bigger"></span><br>
+            <span id="scoreChange" class="medium"></span>
+        </div>
+        <div id="smile">
+            <img id="smile0" src="{{ url_for('static', filename='0.png') }}" class="smile">
+            <img id="smile1" src="{{ url_for('static', filename='1.png') }}" class="hidden smile">
+            <img id="smile2" src="{{ url_for('static', filename='2.png') }}" class="hidden smile">
+        </div>
+        <div id="playAgain" class="hidden section">
+            <a id="playAgainButton" href="#playAgain">Play Again</a>
+        </div>
+    </div>
+
+    <div class="clear">&nbsp;</div>
+</div>
+<!-- TODO fix term definition being switched -->
+<textarea id="data" class="hidden">
+[
+{%set comma='' %}
+{% for term in terms %}
+    {% set definition = term.answertext %}
+	{% if term.answertype == 'blob' %}
+		{%set definition = url_for('serveImage',studyDataId=term.key()) %}
+	{% endif %}
+    {{comma}}{"type":"{{term.answertype}}", "prompt": "{{ definition}}", "answer": "{{term}}", "termId":"{{term.key()}}" }
+    {%set comma=',' %}
+{%endfor%}
+]
+</textarea>
+<div id="imagedumpster" class="hidden"></div>
+<script type="text/javascript">
+isMultChoice = {%if type=='choice'%}true{%else%}false{%endif%};
+ajaxStatsPath = "{{url_for('addStat',setId=setId)}}";
+</script>
+{% endblock %}

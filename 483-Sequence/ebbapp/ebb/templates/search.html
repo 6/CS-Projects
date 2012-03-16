@@ -1,0 +1,9 @@
+{% extends "subpage.html" %}
+{% if query %}
+{% set title = 'Search results for "'+query+'"' %}
+{% else %}
+{% set title = "Search" %}
+{% endif %}
+{% block content %}
+Search results for <b>{{query}}</b>.
+{% endblock %}

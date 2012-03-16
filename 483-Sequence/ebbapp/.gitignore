@@ -1,0 +1,10 @@
+*.pyc
+*.pyo
+*.swp
+*~
+.DS_Store
+.pydevproject
+.settings
+.project
+env
+env*
